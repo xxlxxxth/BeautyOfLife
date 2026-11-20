@@ -35,7 +35,7 @@ p{margin:0 0 20px}
 .btn.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 .btn[disabled]{opacity:.4;cursor:default}
 .row{display:flex;gap:10px}
-input[type=text]{width:100%;font:inherit;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);margin-top:14px}
+input[type=text]{display:block;box-sizing:border-box;width:100%;font:inherit;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);margin-top:14px}
 .lay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-around;padding-bottom:36px;font-size:34px;pointer-events:none}
 .slw{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
 .slw b{font-size:24px;cursor:pointer;background:var(--bg);border:2px solid var(--line);border-radius:12px;width:46px;height:46px;display:grid;place-items:center;user-select:none}
@@ -284,6 +284,11 @@ p{margin-bottom:clamp(10px,2vh,20px)}
 @keyframes wob{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-4deg) scale(1.08)}}
 @keyframes shn{to{left:130%}}
 @media (prefers-reduced-motion:reduce){.bcard,.bic,.bsr,.bst,.bsh,.gb2 .gg{animation:none}}
+#snd{position:fixed;top:10px;right:10px;z-index:60;width:42px;height:42px;border-radius:50%;border:2px solid #fff;background:linear-gradient(#FF8A2B,#F26B0F);color:#fff;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 3px 0 #C2530A,0 6px 14px rgba(0,0,0,.25);padding:0}
+#snd.hl{animation:snp 1s ease-in-out infinite}
+@keyframes snp{50%{transform:scale(1.35);box-shadow:0 0 0 8px rgba(255,255,255,.55),0 3px 0 #C2530A}}
+@media (prefers-reduced-motion:reduce){#snd.hl{animation:none;outline:4px solid #fff}}
+#snd.off{background:#9a8c82;box-shadow:0 3px 0 #6d625a,0 6px 14px rgba(0,0,0,.25)}
 .svi{display:block;width:100%;max-height:62vh;object-fit:contain;border-radius:14px;background:#fff}
 .svt{color:#fff;text-align:center;font-size:14px;margin:10px 0 0;line-height:1.6;text-shadow:0 1px 6px rgba(0,0,0,.4)}
 .ov a.btn{text-decoration:none}
@@ -330,15 +335,15 @@ function show(w,text,acts){ov.style.display="flex";ov.innerHTML=`<div class="pop
  const fin=u=>{if(done)return;if(u===1)stat.skips++;done=true;clearInterval(T);tx.textContent=text;ac.innerHTML="";
   acts.forEach(([l,f])=>{const b=document.createElement("button");b.className="btn c";b.textContent=l;b.onclick=f;ac.appendChild(b)})};
  const sk=document.createElement("button");sk.className="btn c ghost";sk.textContent=L("⏩ Show full text","⏩ แสดงข้อความทั้งหมด");sk.onclick=()=>fin(1);ac.appendChild(sk);
- T=setInterval(()=>{tx.textContent+=a[i++]||"";if(i>=a.length)fin()},22);
+ T=setInterval(()=>{tx.textContent+=a[i++]||"";if(i%3==0)SND.play("tick");if(i>=a.length)fin()},22);
  ov.querySelector(".bub").onclick=()=>fin(1)}
 const hide=()=>{clearInterval(T);ov.style.display="none"};
 const CCOL=[["#FFF1C9","#F2B632"],["#FFE4D1","#F58A2E"],["#E4F5E0","#6CC94E"],["#EADFF7","#9B7BD6"]];
-function cardPop(i,c,done){const k=CCOL[i];ov.style.display="flex";clearInterval(T);
+function cardPop(i,c,done){SND.play("pop");setTimeout(()=>SND.play("chime"),250);const k=CCOL[i];ov.style.display="flex";clearInterval(T);
  ov.innerHTML=`<div class="pop"><div class="gb2"><span class="gg">${goose(48)}</span><div class="gbb">${L("Beauty card unlocked!","ปลดล็อกการ์ดความงาม!")}</div></div><div class="bcard" style="background:${k[0]};border-color:${k[1]}"><div class="bst">✨ ${L("NEW","ใหม่")}</div><div class="bic">${c[0]}</div><div class="bsr">⭐</div><h3>${c[1]}</h3><div class="bln" style="background:${k[1]}"></div><p>${c[2]}</p>${c[3]?`<div class="bsm">${c[3]}</div>`:""}<div class="bsh"></div></div><div id="ac"><button class="btn c" id="cok">${L("OK","ตกลง")}</button></div></div>`;
  $("#cok").onclick=()=>{hide();done()}}
 function dlg(Ls,done,i=0){const last=i>=Ls.length-1;show(Ls[i][0],Ls[i][1],[[last?L("OK","ตกลง"):L("Next ▶","ถัดไป ▶"),()=>last?(hide(),done&&done()):dlg(Ls,done,i+1)]])}
-function party(t=L("🎉 Correct!","🎉 ถูกต้อง!")){const d=document.createElement("div");d.className="party";const c=["#F58A2E","#D95F0E","#7A1C2E","#FFC48A","#fff"];
+function party(t=L("🎉 Correct!","🎉 ถูกต้อง!")){SND.play("fan");const d=document.createElement("div");d.className="party";const c=["#F58A2E","#D95F0E","#7A1C2E","#FFC48A","#fff"];
  d.innerHTML=Array.from({length:70},()=>`<i style="left:${Math.random()*100}%;background:${c[Math.random()*5|0]};animation-delay:${Math.random()*.6}s;animation-duration:${1.5+Math.random()}s"></i>`).join("")+"<b>"+t+"</b>";
  document.body.appendChild(d);setTimeout(()=>d.remove(),2800)}
 
@@ -378,8 +383,8 @@ function playCurtain(){
 
 /* start: language -> goose -> name */
 function pick(){prog(0);resetStat();box.innerHTML=`<div class="hero"><div class="xb">GEN241 INTERACTIVE EXHIBITION</div><span class="pill">🎓 KMUTT · Group INT 38-01</span><h1>The Beauty We Walked Past</h1><p>Exploring Human Beauty at Wat Phuttha Bucha community<br><span class="mute">สำรวจความงามของมนุษย์ ณ ชุมชนวัดพุทธบูชา</span></p></div><div class="stage"><div class="ground"></div><div class="road"></div><div class="obj" style="left:12%">🌴</div><div class="obj" style="left:28%">🛕</div><div class="obj" style="left:72%">🥥</div><div class="obj" style="left:88%">🍜</div><div class="gh">${goose(100)}<div class="sb">Honk! Choose your language · เลือกภาษา</div></div></div>`;
- btn("English",()=>{lang="en";hello()},"c");btn("ไทย",()=>{lang="th";hello()},"c");playCurtain()}
-function hello(){dlg([[G(),L("Honk honk! Let’s go on fieldwork at Wat Phuttha Bucha in Bang Mot!","ก๊าก ก๊าก! ไปลงพื้นที่ที่วัดพุทธบูชา บางมด กันเถอะ!")],[G(),L("I’m the KMUTT goose. You’re a KMUTT student, and today you’ll meet the people here and find the beauty we usually walk past.","เราคือห่านประจำ มจธ. วันนี้เธอเป็นนักศึกษา มจธ. จะได้พบผู้คนที่นี่ และค้นหาความงามที่เรามักเดินผ่านโดยไม่ทันสังเกต")]],intro)}
+ btn("English",()=>{lang="en";SND.play("honk");hello()},"c");btn("ไทย",()=>{lang="th";SND.play("honk");hello()},"c");playCurtain()}
+function hello(){const sb=$("#snd");sb.classList.add("hl");dlg([[G(),L("Honk honk! Let’s go on fieldwork at Wat Phuttha Bucha in Bang Mot!","ก๊าก ก๊าก! ไปลงพื้นที่ที่วัดพุทธบูชา บางมด กันเถอะ!")],[G(),L("Psst! See the round 🔊 button at the top right? Tap it to switch my music and honks on or off. Sitting in class? Please honk quietly. 🤫","จุ๊ ๆ เห็นปุ่มกลม 🔊 มุมขวาบนไหม แตะเพื่อเปิด-ปิดเพลงกับเสียงของห่านได้เลย นั่งอยู่ในห้องเรียนหรือเปล่า ถ้าใช่ ก๊าก เบา ๆ นะ 🤫")],[G(),L("I’m the KMUTT goose. You’re a KMUTT student, and today you’ll meet the people here and find the beauty we usually walk past.","เราคือห่านประจำ มจธ. วันนี้เธอเป็นนักศึกษา มจธ. จะได้พบผู้คนที่นี่ และค้นหาความงามที่เรามักเดินผ่านโดยไม่ทันสังเกต")]],()=>{sb.classList.remove("hl");intro()})}
 function intro(){prog(0);
  box.innerHTML=`<h1>${L("Who is exploring today?","วันนี้ใครมาลงพื้นที่?")}</h1><div style="text-align:center" id="pv">${pl(150)}</div><div class="row"><button class="btn ghost c ${me.g=="m"?"on":""}" data-g="m">${L("Mr","นาย")}</button><button class="btn ghost c ${me.g=="f"?"on":""}" data-g="f">${L("Ms","นางสาว")}</button></div><input type="text" id="nm" placeholder="${L("Your first name","ชื่อของเธอ")}" maxlength="14" value="${esc(me.n)}">`;
  box.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{me.g=b.dataset.g;box.querySelectorAll("[data-g]").forEach(x=>x.classList.toggle("on",x==b));$("#pv").innerHTML=pl(150)});
@@ -463,7 +468,7 @@ function ch4(){prog(4);
  document.querySelectorAll(".fl").forEach(o=>o.onclick=()=>{if(lock)return;
   if(o.textContent==Q[q][1]){lock=true;if(!tried)sc++;tried=false;q++;party();$("#gt").textContent=L("Honk! Correct, "+nm()+"!","ก๊าก! ถูกต้อง "+nm()+"!");
    setTimeout(()=>{if(q<Q.length)ask();else{stat.sc=sc;stat.qn=Q.length;$("#gt").textContent=L("You got "+sc+" of "+Q.length+" on the first try. Now let’s connect the community!","ตอบถูกในครั้งแรก "+sc+" จาก "+Q.length+" ข้อ! ต่อไปมาเชื่อมชุมชนกันเถอะ!");$("#pc").textContent="";$("#hb").remove();btn(L("Connect the community","เชื่อมชุมชน"),ch5,"c")}},1900)}
-  else{tried=true;o.classList.add("no");setTimeout(()=>o.classList.remove("no"),400);miss++;if(miss==2)stat.hints++;$("#gt").textContent=L("Hmm, not that one! 🤔","อืม… ไม่ใช่นะ! 🤔")+"\n\n"+Q[q][0]+(miss>=2?"\n\n💡 "+H[q]:"")}});
+  else{SND.play("wrong");tried=true;o.classList.add("no");setTimeout(()=>o.classList.remove("no"),400);miss++;if(miss==2)stat.hints++;$("#gt").textContent=L("Hmm, not that one! 🤔","อืม… ไม่ใช่นะ! 🤔")+"\n\n"+Q[q][0]+(miss>=2?"\n\n💡 "+H[q]:"")}});
  ask();$("#hb").onclick=()=>{if(lock)return;tried=true;stat.hints++;$("#gt").textContent=Q[q][0]+"\n\n💡 "+H[q]}}
 
 /* 5 connect the community */
@@ -594,6 +599,35 @@ pick();
  const chk=()=>{const more=document.documentElement.scrollHeight-(window.scrollY+window.innerHeight)>50;d.classList.toggle("on",more&&getComputedStyle(ov).display=="none")};
  d.onclick=()=>window.scrollBy({top:Math.round(window.innerHeight*.7),behavior:"smooth"});
  addEventListener("scroll",chk,{passive:true});addEventListener("resize",chk);setInterval(chk,400)})();
+
+/* sound: generated live with Web Audio (no audio files, no copyright) */
+const SND=(()=>{let ac=null,mg=null,on=true,mus=null,step=0,nextT=0,started=false;
+ try{on=localStorage.getItem("snd")!=="0"}catch(e){}
+ const ctx=()=>{if(!ac){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;ac=new C();mg=ac.createGain();mg.gain.value=on?1:0;mg.connect(ac.destination)}if(ac.state=="suspended")ac.resume();return ac};
+ const tone=(f,t,d,type,v,dest)=>{const a=ac,o=a.createOscillator(),g=a.createGain();o.type=type||"sine";o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(dest||mg);o.start(t);o.stop(t+d+.05)};
+ const P=[261.63,293.66,329.63,392,440,523.25,587.33,659.25],CH=[[130.81,196,261.63],[110,164.81,220],[87.31,130.81,174.61],[98,146.83,196]];
+ let mgain=null;
+ const sched=()=>{const a=ac;if(!a||!on)return;while(nextT<a.currentTime+.6){const t=Math.max(nextT,a.currentTime+.02);
+   if(step%16==0){const c=CH[(step/16)%4];c.forEach(f=>tone(f,t,3.6,"sine",.05,mgain))}
+   if(Math.random()<.62){const f=P[Math.floor(Math.random()*P.length)];tone(f,t,1.1,"triangle",.07,mgain)}
+   step++;nextT+=.42}};
+ const api={
+  on:()=>on,
+  unlock(){if(started)return;if(!ctx())return;started=true;mgain=ac.createGain();mgain.gain.value=.55;mgain.connect(mg);nextT=ac.currentTime+.1;mus=setInterval(sched,200)},
+  set(v){on=v;try{localStorage.setItem("snd",v?"1":"0")}catch(e){}if(ac&&mg)mg.gain.setTargetAtTime(v?1:0,ac.currentTime,.05);if(v&&started){nextT=ac.currentTime+.1}},
+  play(k){if(!on||!ctx())return;const t=ac.currentTime+.005;
+   if(k=="tap"){tone(660,t,.09,"sine",.12);tone(990,t+.05,.09,"sine",.08)}
+   else if(k=="tick"){tone(1200+Math.random()*300,t,.03,"square",.012)}
+   else if(k=="pop"){tone(300,t,.12,"sine",.2);tone(600,t+.06,.15,"sine",.15)}
+   else if(k=="chime"){[523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,t+i*.09,.6,"triangle",.14))}
+   else if(k=="wrong"){tone(220,t,.25,"sine",.18);tone(185,t+.12,.3,"sine",.15)}
+   else if(k=="honk"){[0,.17].forEach(d=>{const o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();o.type="sawtooth";o.frequency.setValueAtTime(380,t+d);o.frequency.linearRampToValueAtTime(520,t+d+.06);o.frequency.linearRampToValueAtTime(330,t+d+.16);f.type="bandpass";f.frequency.value=900;f.Q.value=2;g.gain.setValueAtTime(.0001,t+d);g.gain.exponentialRampToValueAtTime(.22,t+d+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d+.17);o.connect(f);f.connect(g);g.connect(mg);o.start(t+d);o.stop(t+d+.2)})}
+   else if(k=="fan"){[392,523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,t+i*.11,.8,"triangle",.15))}}};
+ return api})();
+(()=>{const b=document.createElement("button");b.id="snd";b.setAttribute("aria-label","Sound on/off");
+ const u=()=>{b.textContent=SND.on()?"🔊":"🔇";b.classList.toggle("off",!SND.on())};u();
+ b.onclick=e=>{e.stopPropagation();SND.unlock();SND.set(!SND.on());u();if(SND.on())SND.play("tap")};document.body.appendChild(b);
+ addEventListener("pointerdown",e=>{SND.unlock();if(e.target.closest&&e.target.closest("button")&&e.target!==b){SND.play("tap")}},true)})();
 </script>
 </body>
 </html>
