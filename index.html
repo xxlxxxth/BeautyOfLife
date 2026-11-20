@@ -162,6 +162,7 @@ p{margin-bottom:clamp(10px,2vh,20px)}
 #pv{background:radial-gradient(circle at 50% 45%,#FFF3E0 0,#FFE0BC 46%,transparent 68%)}
 .cert{background:linear-gradient(#FFF8EE,#FFE9D0);color:#2A2522}.cert .mute{color:#7C6F66}
 .pill{display:inline-block;background:linear-gradient(180deg,#FF8A2B,#F26B0F);color:#fff;font-weight:600;font-size:14px;border-radius:99px;padding:2px 14px;margin-bottom:8px}.hero{text-align:center}.gh{animation:hop 1s infinite}
+#ei.glow:after{content:attr(data-tap);display:block;margin:2px auto 0;width:max-content;font-size:13px;font-weight:700;line-height:1.6;color:#fff;background:var(--acc);border-radius:99px;padding:0 10px}
 </style>
 </head>
 <body>
@@ -242,11 +243,26 @@ function ch3(){prog(3);
 ["🏭",L("Factory era","ยุคโรงงาน"),L("The factories","โรงงาน"),L("Factories moved onto the old farmland. There was a time when people asked for them to close because of polluted air and water.","โรงงานเข้ามาอยู่บนที่เกษตรเก่า ช่วงหนึ่งมีเสียงเรียกร้องให้ปิดโรงงาน เพราะอากาศและน้ำเสีย")],
 ["🏘️",L("Today","ปัจจุบัน"),L("Today’s community","ชุมชนวันนี้"),L("Roads and housing estates keep growing, yet old villages, factories and the temple live side by side. This is now Bang Mot khwaeng, Thung Khru khet, close to Bang Khun Thian, Chom Thong and Rat Burana.","ถนนและหมู่บ้านจัดสรรเพิ่มขึ้นเรื่อยๆ แต่ชุมชนเก่า โรงงาน และวัดก็อยู่ร่วมกัน ที่นี่คือแขวงบางมด เขตทุ่งครุ ใกล้บางขุนเทียน จอมทอง และราษฎร์บูรณะ")]];
  box.innerHTML=`<h2>${L("3 · Then & Now","3 · อดีตถึงปัจจุบัน")}</h2>${gd(L("Drag the big circle to the right to travel through time! →","ลากวงกลมใหญ่ไปทางขวาเพื่อเดินทางข้ามเวลา! →"),"g3")}<p id="era" style="font-weight:600;color:var(--acc);margin:0"></p><div class="stage"><div class="ground"></div>${L4.map((l,k)=>`<div class="lay" id="l${k}">${l.map(e=>"<span>"+e+"</span>").join("")}</div>`).join("")}<div class="obj glow" id="ei" style="left:50%;top:10px;bottom:auto"></div></div><div class="gw"><div id="gg">${goose(54)}</div></div><div class="hint" id="hint">${L("👆 Drag the circle to the right →","👆 ลากวงกลมไปทางขวา →")}</div><div class="slw"><b id="mi">◀</b><input type="range" id="sl" min="0" max="300" value="0"><b id="pl">▶</b></div><div class="era"><span>${L("Long ago","สมัยก่อน")}</span><span>${L("Today","ปัจจุบัน")}</span></div>`;
+ const seen=new Set();let top=0,lastB=0;
  const nx=btn(L("Continue","ไปต่อ"),ch4,"c");nx.disabled=true;
  const k=()=>Math.round(+$("#sl").value/100);
- const t=()=>{const v=+$("#sl").value/100;L4.forEach((_,j)=>$("#l"+j).style.opacity=Math.max(0,1-Math.abs(v-j)));$("#era").textContent="🕰 "+E[k()][1];$("#ei").textContent=E[k()][0];$("#gg").style.left="calc((100% - 54px)*"+(v/3)+")";if(v>0)$("#hint").classList.add("off");$("#g3").textContent=v>2.9?L("You reached today! Press Continue. 🎉","ถึงปัจจุบันแล้ว! กดไปต่อได้เลย 🎉"):v>0?L("Now tap the glowing icon in the picture to hear the story! 👆","แตะไอคอนที่เรืองแสงในภาพเพื่อฟังเรื่องเล่า! 👆"):L("Drag the big circle to the right to travel through time! →","ลากวงกลมใหญ่ไปทางขวาเพื่อเดินทางข้ามเวลา! →");if(v>2.9)nx.disabled=false};
- $("#ei").onclick=()=>{const e=E[k()];dlg([[{s:e[0],n:e[2]},e[3]]])};
- $("#sl").oninput=()=>{t();const g=$("#gg");g.classList.add("mv");clearTimeout(g.t);g.t=setTimeout(()=>g.classList.remove("mv"),300)};$("#mi").onclick=()=>{$("#sl").value=Math.max(0,+$("#sl").value-100);t()};$("#pl").onclick=()=>{$("#sl").value=Math.min(300,+$("#sl").value+100);t()};t()}
+ const say=x=>$("#g3").textContent=x;
+ const t=blocked=>{let v=+$("#sl").value/100;
+  if(v>top){v=top;$("#sl").value=top*100;blocked=1;lastB=1}
+  L4.forEach((_,j)=>$("#l"+j).style.opacity=Math.max(0,1-Math.abs(v-j)));
+  const i=k(),ei=$("#ei");
+  $("#era").textContent="🕰 "+E[i][1]+" · 📖 "+seen.size+"/4";
+  ei.textContent=E[i][0];ei.dataset.tap=L("TAP!","แตะ!");ei.classList.toggle("glow",!seen.has(i));ei.classList.toggle("done",seen.has(i));
+  $("#gg").style.left="calc((100% - 54px)*"+(v/3)+")";
+  $("#hint").classList.toggle("off",v>=top-.05);
+  say(seen.size==4?L("You’ve heard every era! Press Continue. 🎉","ฟังครบทุกยุคแล้ว! กดไปต่อได้เลย 🎉"):blocked?L("Hold on! Tap the glowing icon to hear this part of the story first. 👆","เดี๋ยวก่อน! แตะไอคอนที่เรืองแสงเพื่อฟังเรื่องราวช่วงนี้ก่อน 👆"):!seen.has(i)?L("Tap the glowing icon to hear the story of this time! 👆","แตะไอคอนที่เรืองแสงเพื่อฟังเรื่องราวของยุคนี้! 👆"):L("Nice! Now drag the circle right to the next time →","เยี่ยม! ลากวงกลมไปทางขวาเพื่อไปยุคถัดไป →"));
+  nx.disabled=seen.size<4};
+ $("#ei").onclick=()=>{const i=k();$("#sl").value=i*100;const e=E[i];dlg([[{s:e[0],n:e[2]},e[3]]],()=>{seen.add(i);top=Math.max(top,Math.min(3,i+1));t()})};
+ $("#sl").oninput=()=>{lastB=0;t();const g=$("#gg");g.classList.add("mv");clearTimeout(g.t);g.t=setTimeout(()=>g.classList.remove("mv"),300)};
+ $("#sl").onchange=()=>{const b=lastB;lastB=0;$("#sl").value=k()*100;t(b)};
+ $("#mi").onclick=()=>{$("#sl").value=Math.max(0,k()*100-100);t()};
+ $("#pl").onclick=()=>{$("#sl").value=Math.min(300,k()*100+100);t()};
+ t()}
 
 /* 4 memory check */
 function ch4(){prog(4);
