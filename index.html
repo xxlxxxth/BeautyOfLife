@@ -54,7 +54,15 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
 .big2{font-size:56px;line-height:1}
 .fl{position:absolute;font-size:46px;cursor:pointer;animation:fl 3s ease-in-out infinite alternate}
 @keyframes fl{to{transform:translateY(-14px)}}
-.fl.no{animation:shake .4s}
+.fl.no{animation:shake .5s,dzy .8s;filter:drop-shadow(0 0 10px #E5484D)}
+.fl.no:after{content:"❌";position:absolute;top:-20px;left:50%;margin-left:-12px;font-size:24px;animation:xm .9s ease-out forwards}
+@keyframes dzy{to{transform:rotate(0)}0%{transform:rotate(0)}30%{transform:rotate(-14deg)}60%{transform:rotate(12deg)}}
+@keyframes xm{0%{transform:scale(.2);opacity:0}25%{transform:scale(1.5);opacity:1}100%{transform:translateY(-14px) scale(1);opacity:0}}
+.stage.bad{animation:bad .6s}
+@keyframes bad{0%,100%{box-shadow:inset 0 0 0 0 rgba(229,72,77,0)}30%{box-shadow:inset 0 0 0 6px rgba(229,72,77,.65)}}
+.gdz{animation:gdz .7s}
+@keyframes gdz{15%{transform:rotate(-16deg) translateY(2px)}35%{transform:rotate(14deg)}55%{transform:rotate(-10deg)}75%{transform:rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){.fl.no,.stage.bad,.gdz{animation:none}}
 @keyframes shake{25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
 .ov{position:fixed;inset:0;background:rgba(30,16,6,.8);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;overflow:auto}
 .pop{width:100%;max-width:420px;text-align:center}
@@ -468,7 +476,7 @@ function ch4(){prog(4);
  document.querySelectorAll(".fl").forEach(o=>o.onclick=()=>{if(lock)return;
   if(o.textContent==Q[q][1]){lock=true;if(!tried)sc++;tried=false;q++;party();$("#gt").textContent=L("Honk! Correct, "+nm()+"!","ก๊าก! ถูกต้อง "+nm()+"!");
    setTimeout(()=>{if(q<Q.length)ask();else{stat.sc=sc;stat.qn=Q.length;$("#gt").textContent=L("You got "+sc+" of "+Q.length+" on the first try. Now let’s connect the community!","ตอบถูกในครั้งแรก "+sc+" จาก "+Q.length+" ข้อ! ต่อไปมาเชื่อมชุมชนกันเถอะ!");$("#pc").textContent="";$("#hb").remove();btn(L("Connect the community","เชื่อมชุมชน"),ch5,"c")}},1900)}
-  else{SND.play("wrong");tried=true;o.classList.add("no");setTimeout(()=>o.classList.remove("no"),400);miss++;if(miss==2)stat.hints++;$("#gt").textContent=L("Hmm, not that one! 🤔","อืม… ไม่ใช่นะ! 🤔")+"\n\n"+Q[q][0]+(miss>=2?"\n\n💡 "+H[q]:"")}});
+  else{SND.play("wrong");tried=true;const stg=box.querySelector(".stage"),gg=box.querySelector(".gq>div");o.classList.add("no");stg.classList.add("bad");gg.classList.add("gdz");setTimeout(()=>{o.classList.remove("no");stg.classList.remove("bad");gg.classList.remove("gdz")},900);miss++;if(miss==2)stat.hints++;const WL=[L("Hmm, not that one! 🤔","อืม… ไม่ใช่นะ! 🤔"),L("Oops! Even the goose got dizzy. 😵","อุ๊ย! ห่านงงจนหัวหมุนเลย 😵"),L("Nope! Try another icon. 👀","ยังไม่ใช่ ลองไอคอนอื่นดูนะ 👀"),L("Honk? Not that one! 🪿","ก๊าก? ไม่ใช่อันนี้นะ 🪿")];$("#gt").textContent=WL[Math.floor(Math.random()*WL.length)]+"\n\n"+Q[q][0]+(miss>=2?"\n\n💡 "+H[q]:"")}});
  ask();$("#hb").onclick=()=>{if(lock)return;tried=true;stat.hints++;$("#gt").textContent=Q[q][0]+"\n\n💡 "+H[q]}}
 
 /* 5 connect the community */
@@ -612,7 +620,7 @@ const SND=(()=>{let ac=null,mg=null,on=true,mus=null,step=0,nextT=0,started=fals
    if(Math.random()<.62){const f=P[Math.floor(Math.random()*P.length)];tone(f,t,1.1,"triangle",.07,mgain)}
    step++;nextT+=.42}};
  const api={
-  on:()=>on,
+  on:()=>on,resume(){if(ac&&ac.state!="running")ac.resume()},
   unlock(){if(started)return;if(!ctx())return;started=true;mgain=ac.createGain();mgain.gain.value=.55;mgain.connect(mg);nextT=ac.currentTime+.1;mus=setInterval(sched,200)},
   set(v){on=v;try{localStorage.setItem("snd",v?"1":"0")}catch(e){}if(ac&&mg)mg.gain.setTargetAtTime(v?1:0,ac.currentTime,.05);if(v&&started){nextT=ac.currentTime+.1}},
   play(k){if(!on||!ctx())return;const t=ac.currentTime+.005;
@@ -620,14 +628,14 @@ const SND=(()=>{let ac=null,mg=null,on=true,mus=null,step=0,nextT=0,started=fals
    else if(k=="tick"){tone(1200+Math.random()*300,t,.03,"square",.012)}
    else if(k=="pop"){tone(300,t,.12,"sine",.2);tone(600,t+.06,.15,"sine",.15)}
    else if(k=="chime"){[523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,t+i*.09,.6,"triangle",.14))}
-   else if(k=="wrong"){tone(220,t,.25,"sine",.18);tone(185,t+.12,.3,"sine",.15)}
+   else if(k=="wrong"){[[0,392,330],[.3,330,262],[.6,262,196]].forEach(([d,a,b])=>{const o=ac.createOscillator(),g=ac.createGain(),l=ac.createOscillator(),lg=ac.createGain();o.type="triangle";o.frequency.setValueAtTime(a,t+d);o.frequency.exponentialRampToValueAtTime(b,t+d+.26);l.frequency.value=9;lg.gain.value=9;l.connect(lg);lg.connect(o.frequency);g.gain.setValueAtTime(.0001,t+d);g.gain.exponentialRampToValueAtTime(.2,t+d+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d+.3);o.connect(g);g.connect(mg);o.start(t+d);l.start(t+d);o.stop(t+d+.32);l.stop(t+d+.32)});tone(90,t,.15,"sine",.25)}
    else if(k=="honk"){[0,.17].forEach(d=>{const o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();o.type="sawtooth";o.frequency.setValueAtTime(380,t+d);o.frequency.linearRampToValueAtTime(520,t+d+.06);o.frequency.linearRampToValueAtTime(330,t+d+.16);f.type="bandpass";f.frequency.value=900;f.Q.value=2;g.gain.setValueAtTime(.0001,t+d);g.gain.exponentialRampToValueAtTime(.22,t+d+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d+.17);o.connect(f);f.connect(g);g.connect(mg);o.start(t+d);o.stop(t+d+.2)})}
    else if(k=="fan"){[392,523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,t+i*.11,.8,"triangle",.15))}}};
  return api})();
 (()=>{const b=document.createElement("button");b.id="snd";b.setAttribute("aria-label","Sound on/off");
  const u=()=>{b.textContent=SND.on()?"🔊":"🔇";b.classList.toggle("off",!SND.on())};u();
  b.onclick=e=>{e.stopPropagation();SND.unlock();SND.set(!SND.on());u();if(SND.on())SND.play("tap")};document.body.appendChild(b);
- addEventListener("pointerdown",e=>{SND.unlock();if(e.target.closest&&e.target.closest("button")&&e.target!==b){SND.play("tap")}},true)})();
+ addEventListener("pointerdown",e=>{SND.unlock();if(e.target.closest&&e.target.closest("button")&&e.target!==b){SND.play("tap")}},true);["touchend","click"].forEach(ev=>addEventListener(ev,()=>{SND.unlock();SND.resume()},true))})();
 </script>
 </body>
 </html>
