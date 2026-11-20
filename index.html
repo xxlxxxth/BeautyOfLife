@@ -161,6 +161,7 @@ p{margin-bottom:clamp(10px,2vh,20px)}
 .stage{background:linear-gradient(#7FD0FF,#E3F6FF)}.ground{background:linear-gradient(#A6E884,#6CC94E)}
 #pv{background:radial-gradient(circle at 50% 45%,#FFF3E0 0,#FFE0BC 46%,transparent 68%)}
 .cert{background:linear-gradient(#FFF8EE,#FFE9D0);color:#2A2522}.cert .mute{color:#7C6F66}
+.pill{display:inline-block;background:linear-gradient(180deg,#FF8A2B,#F26B0F);color:#fff;font-weight:600;font-size:14px;border-radius:99px;padding:2px 14px;margin-bottom:8px}.hero{text-align:center}.gh{animation:hop 1s infinite}
 </style>
 </head>
 <body>
@@ -176,7 +177,7 @@ const prog=n=>{window.scrollTo(0,0);document.querySelectorAll("#steps i").forEac
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let lang="en",me={n:"",g:"m"};
 const L=(e,t)=>lang=="th"?t:e;
-const nm=()=>(lang=="th"?(me.g=="m"?"นาย":"น.ส."):(me.g=="m"?"Mr":"Ms"))+" "+me.n;
+const nm=()=>(me.anon?"":(lang=="th"?(me.g=="m"?"นาย":"น.ส."):(me.g=="m"?"Mr":"Ms"))+" ")+me.n;
 const gd=(t,id)=>`<div class="gq walk"><div>${goose(76)}</div><div class="bub2"${id?` id="${id}"`:""}>${t}</div></div>`;
 function btn(t,f,cls){const b=document.createElement("button");b.className="btn "+(cls||"");b.textContent=t;b.onclick=f;box.appendChild(b);return b}
 
@@ -202,13 +203,13 @@ function party(t=L("🎉 Correct!","🎉 ถูกต้อง!")){const d=docum
  document.body.appendChild(d);setTimeout(()=>d.remove(),2800)}
 
 /* start: language -> goose -> name */
-function pick(){prog(0);box.innerHTML=`<h1>🌏 Language · ภาษา</h1>`;
+function pick(){prog(0);box.innerHTML=`<div class="hero"><span class="pill">🎓 KMUTT · Group INT 38-01</span><h1>The Beauty We Walked Past</h1><p>Exploring Human Beauty at Wat Phuttha Bucha community<br><span class="mute">สำรวจความงามของมนุษย์ ณ ชุมชนวัดพุทธบูชา</span></p></div><div class="stage"><div class="ground"></div><div class="road"></div><div class="bub2" style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:max-content;max-width:90%;min-height:0;padding:4px 12px;font-size:14px;line-height:1.6;z-index:2">Honk! Choose your language · เลือกภาษา</div><div class="obj" style="left:12%">🌴</div><div class="obj" style="left:28%">🛕</div><div class="obj" style="left:72%">🥥</div><div class="obj" style="left:88%">🍜</div><div class="gh" style="position:absolute;left:50%;margin-left:-45px;bottom:calc(var(--gh) - 24px);line-height:0">${goose(100)}</div></div>`;
  btn("English",()=>{lang="en";hello()},"c");btn("ไทย",()=>{lang="th";hello()},"c")}
 function hello(){dlg([[G(),L("Honk honk! Let’s go on fieldwork at Wat Phuttha Bucha in Bang Mot!","ก๊าบ ก๊าบ! ไปลงพื้นที่ที่วัดพุทธบูชา บางมด กันเถอะ!")],[G(),L("I’m the KMUTT goose. You’re a KMUTT student, and today you’ll meet the people here and find the beauty we usually walk past.","เราคือห่านประจำ มจธ. วันนี้เธอเป็นนักศึกษา มจธ. จะได้พบผู้คนที่นี่ และค้นหาความงามที่เรามักเดินผ่านโดยไม่ทันสังเกต")]],intro)}
 function intro(){prog(0);
  box.innerHTML=`<h1>${L("Who is exploring today?","วันนี้ใครมาลงพื้นที่?")}</h1><div style="text-align:center" id="pv">${pl(150)}</div><div class="row"><button class="btn ghost c ${me.g=="m"?"on":""}" data-g="m">${L("Mr","นาย")}</button><button class="btn ghost c ${me.g=="f"?"on":""}" data-g="f">${L("Ms","นางสาว")}</button></div><input type="text" id="nm" placeholder="${L("Your first name","ชื่อของเธอ")}" maxlength="14" value="${esc(me.n)}">`;
  box.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{me.g=b.dataset.g;box.querySelectorAll("[data-g]").forEach(x=>x.classList.toggle("on",x==b));$("#pv").innerHTML=pl(150)});
- btn(L("Start the trip","เริ่มเลย"),()=>{me.n=$("#nm").value.trim()||L("Explorer","นักสำรวจ");
+ btn(L("Start the trip","เริ่มเลย"),()=>{me.anon=!$("#nm").value.trim();me.n=$("#nm").value.trim()||L("Explorer","นักสำรวจ");
   dlg([[G(),L("Nice to meet you, "+nm()+"! Tap the glowing icons to meet the people of Bang Mot.","ยินดีที่ได้รู้จัก "+nm()+"! แตะไอคอนที่เรืองแสงเพื่อไปพบผู้คนบางมดกันเลย")]],ch1)},"c")}
 
 /* 1 discover */
