@@ -59,6 +59,7 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
 .ov{position:fixed;inset:0;background:rgba(30,16,6,.8);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;overflow:auto}
 .pop{width:100%;max-width:420px;text-align:center}
 .bub{position:relative;background:#fff;color:#2A2522;border:3px solid #2A2522;border-radius:24px;padding:16px 20px;text-align:left;margin-bottom:26px;min-height:120px;animation:pop .35s}
+.pop.gt .bub:after{left:calc(50% + 20px)}
 .bub:after{content:"";position:absolute;bottom:-17px;left:50%;margin-left:-14px;border:14px solid transparent;border-top-color:#2A2522;border-bottom:0}
 .bub b{color:#D95F0E;display:block;font-size:15px}
 .bub div{white-space:pre-line}
@@ -163,6 +164,94 @@ p{margin-bottom:clamp(10px,2vh,20px)}
 .cert{background:linear-gradient(#FFF8EE,#FFE9D0);color:#2A2522}.cert .mute{color:#7C6F66}
 .pill{display:inline-block;background:linear-gradient(180deg,#FF8A2B,#F26B0F);color:#fff;font-weight:600;font-size:14px;border-radius:99px;padding:2px 14px;margin-bottom:8px}.hero{text-align:center}.gh{animation:hop 1s infinite}
 #ei.glow:after{content:attr(data-tap);display:block;margin:2px auto 0;width:max-content;font-size:13px;font-weight:700;line-height:1.6;color:#fff;background:var(--acc);border-radius:99px;padding:0 10px}
+#cin{position:fixed;inset:0;z-index:300;overflow:hidden;transition:opacity .5s}
+#cin.out{opacity:0}
+#cur{position:absolute;left:0;right:0;top:-70px;bottom:-60px;background:repeating-linear-gradient(90deg,#F26B0F 0 34px,#E4590A 34px 52px,#F58A2E 52px 74px,#E4590A 74px 90px);box-shadow:inset 0 -30px 40px rgba(120,40,0,.25)}
+#cur:before{content:"";position:absolute;left:0;right:0;top:-24px;height:24px;background:radial-gradient(circle at 20px 24px,#F26B0F 0 19px,transparent 20px) 0 0/40px 24px repeat-x}
+.ct{position:absolute;left:0;right:0;top:calc(70px + 18%);text-align:center;color:#fff;padding:0 18px;text-shadow:0 3px 10px rgba(120,40,0,.55)}
+.ct b{display:block;font-size:clamp(26px,6vw,46px);line-height:1.4}
+.ct span{display:inline-block;margin-top:8px;background:#fff;color:#C2530A;border-radius:99px;padding:0 14px;font-size:14px;font-weight:600;text-shadow:none}
+.rope{position:absolute;left:calc(50% + 68px);width:4px;top:62%;bottom:248px;background:#E8B93C}
+.ring{position:absolute;left:calc(50% + 56px);bottom:218px;width:28px;height:28px;border:5px solid #E8B93C;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.3)}
+#cgs{position:absolute;left:50%;bottom:24px;width:190px;margin-left:-95px;height:190px;transform-origin:50% 100%;pointer-events:none}
+#cgw{line-height:0}#cgw svg{display:block}
+#cgw.walk{animation:waddle .28s ease-in-out infinite}
+#cgw.strain{animation:strain .09s linear infinite}
+@keyframes strain{25%{translate:-3px 0}75%{translate:3px 0}}
+#cbub{position:absolute;left:50%;bottom:256px;transform:translateX(-50%);width:max-content;max-width:min(86vw,330px);background:#fff;color:#2A2522;border:3px solid #2A2522;border-radius:20px;padding:6px 16px;text-align:center;font-weight:700;font-size:18px;line-height:1.5;opacity:0;pointer-events:none}
+#cbub small{display:block;font-size:14px;font-weight:400;color:#7C6F66}
+#cbub:after{content:"";position:absolute;bottom:-14px;left:calc(50% + 26px);margin-left:-10px;border:10px solid transparent;border-top-color:#2A2522;border-bottom:0}
+#cbub.on{opacity:1;animation:pop .35s}
+#cskip{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:12px;font:inherit;font-weight:600;font-size:14px;line-height:1.6;color:#C2530A;background:rgba(255,255,255,.92);border:0;border-radius:99px;padding:2px 16px;cursor:pointer;z-index:5}
+.ov .btn.ghost{background:#fff;color:#2A2522}
+.gh{position:absolute;left:50%;translate:-50% 0;bottom:calc(var(--gh) - 24px);line-height:0}
+.gh svg{height:clamp(56px,11vh,100px);width:auto}
+.sb{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:12px;width:max-content;max-width:min(340px,88vw);background:var(--bub,#FFF8EE);color:var(--ink);border:2px solid var(--acc);border-radius:16px;padding:2px 12px;font-size:14px;font-weight:600;line-height:1.6;text-align:center}
+.sb:after{content:"";position:absolute;top:100%;left:calc(50% + 12px);margin-left:-8px;border:8px solid transparent;border-top-color:var(--acc);border-bottom:0}
+/* ===== v5: faded street, cards, network, certificate ===== */
+.xb{font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--acc);margin-bottom:6px}
+.stage.gs{background:none}
+.stage.gs .world{position:absolute;inset:0;background:linear-gradient(#7FD0FF,#E3F6FF);filter:sepia(calc(var(--gs,1)*.55)) saturate(calc(1 - var(--gs,1)*.75)) brightness(calc(1 + var(--gs,1)*.08));transition:filter .9s}
+.stage.gs:before,.stage.gs:after{filter:sepia(calc(var(--gs,1)*.55)) saturate(calc(1 - var(--gs,1)*.75)) brightness(calc(1 + var(--gs,1)*.08));transition:filter .9s;z-index:1}
+.stage.gs .obj,.stage.gs #walker{z-index:2}
+.obj.gr{filter:sepia(.55) saturate(.25) brightness(1.08);transition:filter .6s}
+.stage.gs .obj.done{opacity:1;filter:drop-shadow(0 0 8px #FFC24D)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 10px}
+.bc{border:2px dashed var(--line);border-radius:14px;padding:6px 2px;text-align:center;line-height:1.3;color:var(--mute);min-height:74px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:var(--bg)}
+.bc i{font-style:normal;font-size:26px;filter:sepia(.55) saturate(.25);opacity:.55}
+.bc b{font-weight:600;font-size:12px}
+.bc.on{border:2px solid var(--acc2);background:linear-gradient(#FFF8EE,#FFE9D0);color:#2A2522;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+.bc.on i{filter:none;opacity:1}
+.net{position:relative;height:clamp(300px,46vh,440px);border-radius:16px;margin:14px 0;background:radial-gradient(circle at 50% 50%,#FFF1DC,#FFE0BC);overflow:hidden}
+.net .lines{position:absolute;inset:0;width:100%;height:100%}
+.net line{stroke:#D9C3A8;stroke-width:3;stroke-dasharray:4 6;vector-effect:non-scaling-stroke;opacity:.8}
+.net line.on{stroke:#F58A2E;stroke-dasharray:none;stroke-width:5;opacity:1;animation:lnx .8s}
+.net line.rg{stroke:#F7B267;opacity:0;stroke-width:3;stroke-dasharray:2 7;transition:opacity 1.2s}
+.net.all line.rg{opacity:1}
+@keyframes lnx{from{stroke-width:1;opacity:.2}}
+.nd{position:absolute;transform:translate(-50%,-50%);width:96px;background:none;border:0;padding:0;text-align:center;cursor:pointer;font:inherit;line-height:1.25}
+.nd span{display:grid;place-items:center;width:64px;height:64px;margin:0 auto;border-radius:50%;background:#fff;border:3px solid #FFE3C7;font-size:34px;box-shadow:0 4px 12px rgba(0,0,0,.12);transition:.4s}
+.nd small{display:block;margin-top:4px;font-size:12px;font-weight:600;color:#2A2522}
+.nd:not(.tp):not(.on) span{animation:pulse2 1.4s infinite;border-color:#FFA53D}
+.nd.on span{border-color:#F26B0F;background:#FFF1DC}
+.nd.tp{left:50%;top:50%;width:120px}
+.nd.tp span{width:92px;height:92px;font-size:52px}
+.net.all .nd.tp span{box-shadow:0 0 0 10px rgba(255,194,77,.35),0 0 40px 10px rgba(255,194,77,.7);animation:glow 1.6s infinite}
+@keyframes pulse2{50%{transform:scale(1.1)}}
+@keyframes glow{50%{box-shadow:0 0 0 18px rgba(255,194,77,.25),0 0 56px 16px rgba(255,194,77,.8)}}
+.chips{display:grid;gap:10px;margin:14px 0}
+.chip{font:inherit;display:flex;align-items:center;gap:12px;text-align:left;background:var(--bg);color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:10px 14px;cursor:pointer;box-shadow:0 3px 0 var(--line)}
+.chip span{font-size:26px}
+.chip.on{border-color:var(--acc);background:#FFF1DC;color:#2A2522}
+.cert2{position:relative;background:linear-gradient(#FFFDF8,#FFF1DC);color:#2A2522;border:4px double #E8B93C;border-radius:18px;padding:20px 16px 16px;text-align:center;box-shadow:0 10px 30px rgba(242,107,15,.25);overflow:hidden}
+.cert2:before{content:"";position:absolute;inset:6px;border:2px solid #F58A2E;border-radius:12px;pointer-events:none}
+.rib{display:inline-block;background:linear-gradient(180deg,#FF8A2B,#F26B0F);color:#fff;font-weight:700;font-size:12px;letter-spacing:.12em;padding:2px 14px;border-radius:99px;margin-bottom:8px}
+.c1{font-size:12px;letter-spacing:.2em;color:#7C6F66;font-weight:600}
+.c2{font-size:clamp(26px,6vw,40px);margin:0;color:#C2530A;line-height:1.3}
+.c3{margin:2px 0 0;font-size:14px;color:#7C6F66}
+.pair{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin:8px 0 0}
+.gm{position:relative;line-height:0}.gm em{position:absolute;left:0;bottom:30px;font-style:normal;font-size:30px;line-height:1}
+.nm2{font-size:clamp(24px,6vw,34px);font-weight:700;margin:4px 0;line-height:1.4;border-bottom:3px dotted #F58A2E;display:inline-block;padding:0 14px}
+.aw{font-size:19px;font-weight:700;color:#C2530A;margin-top:6px}
+.jk{font-size:14px;color:#5b4e44;margin:0 8px 8px}
+.ql{list-style:none;padding:0;margin:6px auto 8px;max-width:420px;text-align:left;font-size:14px;line-height:1.7}
+.stl{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.stl span{font-size:13px;font-weight:600;background:#fff;border:2px solid #FFE3C7;border-radius:99px;padding:0 12px}
+.cert2 .mini{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
+.qt{background:#fff;border-left:5px solid #F58A2E;border-radius:10px;padding:6px 12px;margin:8px 0;text-align:left;font-size:14px;line-height:1.6}
+.qt small{color:#7C6F66}
+.sg{display:flex;justify-content:center;align-items:center;gap:18px;margin:10px 0;font-size:14px}
+.seal{width:92px;height:92px;border-radius:50%;background:radial-gradient(circle,#FFD23F,#F2A81D);display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px dashed #C2530A;transform:rotate(-10deg);line-height:1}
+.seal small{font-size:8px;font-weight:700;color:#7a3a00;max-width:64px;margin-top:2px}
+.sgn{font-family:'Brush Script MT','Segoe Script',cursive;font-size:22px;color:#C2530A}
+.ft{font-size:13px;color:#5b4e44;line-height:1.6}
+.fp{display:block;margin-top:6px;font-size:11px;color:#8A7B70}
+.msg2{background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:6px}
+.msg2 h2{margin:0 0 6px}
+.card>.btn.c.ns:last-child{position:static;margin-top:16px}
+.svi{display:block;width:100%;max-height:62vh;object-fit:contain;border-radius:14px;background:#fff}
+.svt{color:#fff;text-align:center;font-size:14px;margin:10px 0 0;line-height:1.6;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.ov a.btn{text-decoration:none}
 </style>
 </head>
 <body>
@@ -177,6 +266,9 @@ $("#steps").innerHTML="<i></i>".repeat(N);
 const prog=n=>{window.scrollTo(0,0);document.querySelectorAll("#steps i").forEach((e,i)=>e.classList.toggle("on",i<n))};
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let lang="en",me={n:"",g:"m"};
+const stat={skips:0,hints:0,sc:0,qn:6,cards:new Set(),chip:"",line:""};
+const resetStat=()=>{stat.skips=0;stat.hints=0;stat.sc=0;stat.qn=6;stat.cards.clear();stat.chip="";stat.line=""};
+const CLASSN="GEN241 INTERACTIVE EXHIBITION",GRP="INT 38-01";
 const L=(e,t)=>lang=="th"?t:e;
 const nm=()=>(me.anon?"":(lang=="th"?(me.g=="m"?"นาย":"น.ส."):(me.g=="m"?"Mr":"Ms"))+" ")+me.n;
 const gd=(t,id)=>`<div class="gq walk"><div>${goose(76)}</div><div class="bub2"${id?` id="${id}"`:""}>${t}</div></div>`;
@@ -193,37 +285,89 @@ const G=()=>({s:goose(150),n:L("KMUTT Goose","ห่านมจธ."),h:1});
 
 /* popup talk */
 let T;
-function show(w,text,acts){ov.style.display="flex";ov.innerHTML=`<div class="pop"><div class="bub"><b>${w.n}</b><div id="tx"></div></div><div class="big ${w.h?"hop":""}">${w.s}</div><div id="ac"></div></div>`;
- const tx=$("#tx"),a=[...text];let i=0;clearInterval(T);T=setInterval(()=>{tx.textContent+=a[i++]||"";if(i>=a.length)clearInterval(T)},22);
- ov.querySelector(".bub").onclick=()=>{clearInterval(T);tx.textContent=text};
- acts.forEach(([l,f])=>{const b=document.createElement("button");b.className="btn c";b.textContent=l;b.onclick=f;$("#ac").appendChild(b)})}
+function show(w,text,acts){ov.style.display="flex";ov.innerHTML=`<div class="pop ${w.h?"gt":""}"><div class="bub"><b>${w.n}</b><div id="tx"></div></div><div class="big ${w.h?"hop":""}">${w.s}</div><div id="ac"></div></div>`;
+ const tx=$("#tx"),ac=$("#ac"),a=[...text];let i=0,done=false;clearInterval(T);
+ const fin=u=>{if(done)return;if(u===1)stat.skips++;done=true;clearInterval(T);tx.textContent=text;ac.innerHTML="";
+  acts.forEach(([l,f])=>{const b=document.createElement("button");b.className="btn c";b.textContent=l;b.onclick=f;ac.appendChild(b)})};
+ const sk=document.createElement("button");sk.className="btn c ghost";sk.textContent=L("⏩ Show full text","⏩ แสดงข้อความทั้งหมด");sk.onclick=()=>fin(1);ac.appendChild(sk);
+ T=setInterval(()=>{tx.textContent+=a[i++]||"";if(i>=a.length)fin()},22);
+ ov.querySelector(".bub").onclick=()=>fin(1)}
 const hide=()=>{clearInterval(T);ov.style.display="none"};
 function dlg(Ls,done,i=0){const last=i>=Ls.length-1;show(Ls[i][0],Ls[i][1],[[last?L("OK","ตกลง"):L("Next ▶","ถัดไป ▶"),()=>last?(hide(),done&&done()):dlg(Ls,done,i+1)]])}
 function party(t=L("🎉 Correct!","🎉 ถูกต้อง!")){const d=document.createElement("div");d.className="party";const c=["#F58A2E","#D95F0E","#7A1C2E","#FFC48A","#fff"];
  d.innerHTML=Array.from({length:70},()=>`<i style="left:${Math.random()*100}%;background:${c[Math.random()*5|0]};animation-delay:${Math.random()*.6}s;animation-duration:${1.5+Math.random()}s"></i>`).join("")+"<b>"+t+"</b>";
  document.body.appendChild(d);setTimeout(()=>d.remove(),2800)}
 
+/* ===== goose pulls the curtain ===== */
+let curtainDone=false;
+function playCurtain(){
+ if(curtainDone)return;curtainDone=true;
+ if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const el=document.createElement("div");el.id="cin";el.setAttribute("aria-hidden","true");
+ el.innerHTML=`<div id="cur"><div class="ct"><b>The Beauty We Walked Past</b><span>GEN241 INTERACTIVE EXHIBITION</span><br><span>KMUTT · Group INT 38-01</span></div><i class="rope"></i><i class="ring"></i></div><div id="cbub"></div><div id="cgs"><div id="cgw" class="walk">${goose(190)}</div></div><button id="cskip">Skip ▶ · ข้าม</button>`;
+ document.body.appendChild(el);
+ const H=el.clientHeight,Yf=H-16,TT=9400,tm=[];
+ const cur=$("#cur"),gs=$("#cgs"),gw=$("#cgw"),bub=$("#cbub");
+ const end=()=>{tm.forEach(clearTimeout);el.remove()};
+ $("#cskip").onclick=end;
+ // curtain: [time, y, easing to next]
+ const C=[[0,0,"linear"],[1600,0,"ease-in-out"],[2200,50,"linear"],[2260,48,"linear"],[2320,52,"linear"],[2380,49,"ease-in"],[2600,-8,"ease-out"],[2750,5,"ease-in-out"],[2900,0,"linear"],
+  [3300,0,"ease-in-out"],[4000,85,"linear"],[4060,83,"linear"],[4120,88,"linear"],[4180,84,"ease-in"],[4250,86,"ease-in"],[4500,-10,"ease-out"],[4650,6,"ease-in-out"],[4800,0,"linear"],
+  [5200,0,"ease-in-out"],[6100,125,"linear"],[6160,122,"linear"],[6220,128,"linear"],[6280,124,"ease-in"],[6600,Yf+30,"ease-out"],[6800,Yf-22,"ease-in-out"],[6950,Yf+8,"ease-in-out"],[7080,Yf-5,"ease-in-out"],[7200,Yf,"linear"],[TT,Yf,"linear"]];
+ // goose: [time, x, y, scale, rotate, easing]
+ const G=[[0,0,-.42*H,.2,0,"ease-out"],[400,-70,-.3*H,.38,0,"linear"],[800,60,-.17*H,.58,0,"linear"],[1200,-25,-.06*H,.85,0,"ease-out"],[1600,0,0,1,0,"ease-in-out"],[1700,0,6,1,3,"ease-in-out"],
+  [2200,0,45,.97,10,"linear"],[2380,0,47,.97,11,"ease-in"],[2480,0,-18,1.02,-8,"ease-out"],[2700,0,6,1,2,"ease-in-out"],[2900,0,0,1,0,"ease-in-out"],
+  [3300,0,0,1,3,"ease-in-out"],[4000,0,77,.95,12,"linear"],[4250,0,79,.95,13,"ease-in"],[4400,0,-24,1.03,-10,"ease-out"],[4650,0,8,1,3,"ease-in-out"],[4800,0,0,1,0,"ease-in-out"],
+  [5200,0,0,1,3,"ease-in-out"],[6100,0,112,.92,14,"linear"],[6280,0,115,.92,15,"ease-in"],[6450,0,-35,1.05,-18,"ease-out"],[6700,0,10,1,6,"ease-in-out"],[7000,0,-6,1.02,-3,"ease-in-out"],[7200,0,0,1,0,"ease-in-out"],[TT,0,0,1,0,"linear"]];
+ const o={duration:TT,fill:"forwards"};
+ cur.animate(C.map(k=>({transform:`translateY(${k[1]}px)`,offset:k[0]/TT,easing:k[2]})),o);
+ gs.animate(G.map(k=>({transform:`translate(${k[1]}px,${k[2]}px) rotate(${k[4]}deg) scale(${k[3]})`,offset:k[0]/TT,easing:k[5]})),o);
+ const at=(t,f)=>tm.push(setTimeout(f,t));
+ const say=(en,th)=>{bub.innerHTML=en+"<small>"+th+"</small>";bub.className="";void bub.offsetWidth;bub.className="on"};
+ const strain=on=>gw.className=on?"strain":"";
+ at(1500,()=>strain(0));
+ [[700,"Honk honk! Curtain time!","ก๊าบ ก๊าบ! ได้เวลาเปิดม่าน!"],[1750,"Hnnngh… ah, it’s heavy!","อึ๊บบ… โอ๊ย หนักจัง!"],[2480,"WAH! It bounced back!","ว้าย! ม่านเด้งกลับ!"],
+  [3350,"Again… hnnnngh!","อีกที… อึ๊บบบ!"],[4400,"Don’t you dare… stay down!","อย่าเด้งกลับนะ… อยู่ข้างล่างนะ!"],[5300,"Almost… I’m not giving up!","ใกล้แล้ว… ไม่ยอมแพ้หรอก!"],
+  [6400,"HONK!!","ก๊าบบบ!!"],[7300,"Finally… it’s down! 😮‍💨","ในที่สุดก็ลงมาแล้ว!"],[8300,"Welcome to Wat Phuttha Bucha!","ยินดีต้อนรับสู่วัดพุทธบูชา!"]].forEach(([t,e,h])=>at(t,()=>say(e,h)));
+ [[1700,1],[2400,0],[3400,1],[4250,0],[5300,1],[6300,0]].forEach(([t,v])=>at(t,()=>strain(v)));
+ at(TT,()=>{el.classList.add("out")});at(TT+550,end)}
+
 /* start: language -> goose -> name */
-function pick(){prog(0);box.innerHTML=`<div class="hero"><span class="pill">🎓 KMUTT · Group INT 38-01</span><h1>The Beauty We Walked Past</h1><p>Exploring Human Beauty at Wat Phuttha Bucha community<br><span class="mute">สำรวจความงามของมนุษย์ ณ ชุมชนวัดพุทธบูชา</span></p></div><div class="stage"><div class="ground"></div><div class="road"></div><div class="bub2" style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:max-content;max-width:90%;min-height:0;padding:4px 12px;font-size:14px;line-height:1.6;z-index:2">Honk! Choose your language · เลือกภาษา</div><div class="obj" style="left:12%">🌴</div><div class="obj" style="left:28%">🛕</div><div class="obj" style="left:72%">🥥</div><div class="obj" style="left:88%">🍜</div><div class="gh" style="position:absolute;left:50%;margin-left:-45px;bottom:calc(var(--gh) - 24px);line-height:0">${goose(100)}</div></div>`;
- btn("English",()=>{lang="en";hello()},"c");btn("ไทย",()=>{lang="th";hello()},"c")}
+function pick(){prog(0);resetStat();box.innerHTML=`<div class="hero"><div class="xb">GEN241 INTERACTIVE EXHIBITION</div><span class="pill">🎓 KMUTT · Group INT 38-01</span><h1>The Beauty We Walked Past</h1><p>Exploring Human Beauty at Wat Phuttha Bucha community<br><span class="mute">สำรวจความงามของมนุษย์ ณ ชุมชนวัดพุทธบูชา</span></p></div><div class="stage"><div class="ground"></div><div class="road"></div><div class="obj" style="left:12%">🌴</div><div class="obj" style="left:28%">🛕</div><div class="obj" style="left:72%">🥥</div><div class="obj" style="left:88%">🍜</div><div class="gh">${goose(100)}<div class="sb">Honk! Choose your language · เลือกภาษา</div></div></div>`;
+ btn("English",()=>{lang="en";hello()},"c");btn("ไทย",()=>{lang="th";hello()},"c");playCurtain()}
 function hello(){dlg([[G(),L("Honk honk! Let’s go on fieldwork at Wat Phuttha Bucha in Bang Mot!","ก๊าบ ก๊าบ! ไปลงพื้นที่ที่วัดพุทธบูชา บางมด กันเถอะ!")],[G(),L("I’m the KMUTT goose. You’re a KMUTT student, and today you’ll meet the people here and find the beauty we usually walk past.","เราคือห่านประจำ มจธ. วันนี้เธอเป็นนักศึกษา มจธ. จะได้พบผู้คนที่นี่ และค้นหาความงามที่เรามักเดินผ่านโดยไม่ทันสังเกต")]],intro)}
 function intro(){prog(0);
  box.innerHTML=`<h1>${L("Who is exploring today?","วันนี้ใครมาลงพื้นที่?")}</h1><div style="text-align:center" id="pv">${pl(150)}</div><div class="row"><button class="btn ghost c ${me.g=="m"?"on":""}" data-g="m">${L("Mr","นาย")}</button><button class="btn ghost c ${me.g=="f"?"on":""}" data-g="f">${L("Ms","นางสาว")}</button></div><input type="text" id="nm" placeholder="${L("Your first name","ชื่อของเธอ")}" maxlength="14" value="${esc(me.n)}">`;
  box.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{me.g=b.dataset.g;box.querySelectorAll("[data-g]").forEach(x=>x.classList.toggle("on",x==b));$("#pv").innerHTML=pl(150)});
- btn(L("Start the trip","เริ่มเลย"),()=>{me.anon=!$("#nm").value.trim();me.n=$("#nm").value.trim()||L("Explorer","นักสำรวจ");
-  dlg([[G(),L("Nice to meet you, "+nm()+"! Tap the glowing icons to meet the people of Bang Mot.","ยินดีที่ได้รู้จัก "+nm()+"! แตะไอคอนที่เรืองแสงเพื่อไปพบผู้คนบางมดกันเลย")]],ch1)},"c")}
+ const go=()=>{me.anon=!$("#nm").value.trim();me.n=$("#nm").value.trim()||L("Top Secret Explorer 🕵️","นักสำรวจลับสุดยอด 🕵️");
+  dlg([[G(),L("Nice to meet you, "+nm()+"! Tap the glowing icons to meet the people of Bang Mot.","ยินดีที่ได้รู้จัก "+nm()+"! แตะไอคอนที่เรืองแสงเพื่อไปพบผู้คนบางมดกันเลย")]],ch1)};
+ btn(L("Start the trip","เริ่มเลย"),()=>{if($("#nm").value.trim())return go();me.g0=me.g;
+  show(G(),L("Huh? You didn’t type a name! Want to add one so I can put it on your certificate? Or stay a mystery… I won’t tell anyone. 🤫","เอ๊ะ! ยังไม่ได้พิมพ์ชื่อเลยนะ จะใส่ชื่อไหม ฉันจะได้ใส่ในใบประกาศให้ หรือจะเป็นปริศนาต่อไปก็ได้ ฉันไม่บอกใครหรอก 🤫"),[[L("✏️ Add my name","✏️ ใส่ชื่อ"),()=>{hide();$("#nm").focus()}],[L("🕵️ Stay a mystery","🕵️ ขอเป็นปริศนา"),()=>{hide();go()}]])},"c")}
 
-/* 1 discover */
+/* 1 discover: walk past, then notice */
+const cardsData=()=>[
+ ["💛",L("New beginnings","จุดเริ่มต้นใหม่"),L("Courage to start a new chapter.","ความกล้าที่จะเริ่มชีวิตบทใหม่")],
+ ["🤝",L("Togetherness","ความผูกพัน"),L("A centre where people gather and mingle.","ศูนย์กลางที่ผู้คนมาพบปะและหลอมรวมกัน")],
+ ["🧺",L("Fair prices","ราคาเป็นมิตร"),L("Affordable goods for everyone nearby.","ของราคาย่อมเยาสำหรับทุกคนในละแวกนี้")],
+ ["📜",L("Living memory","ความทรงจำที่ยังมีชีวิต"),L("72 years of history, told by someone who lived it.","ประวัติศาสตร์ 72 ปี เล่าโดยคนที่อยู่กับมันจริง ๆ")]];
+const chipOf=k=>({people:["👥",L("The people","ผู้คน")],culture:["🛕",L("The traditions & culture","ประเพณีและวัฒนธรรม")],memories:["💭",L("The shared memories","ความทรงจำร่วมกัน")]})[k];
 function ch1(){prog(1);const P=[
 ["🍜",L("Food shop owner","เจ้าของร้านอาหาร"),L("Hello, "+nm()+"! I moved here about three years ago to take over this shop and start a new chapter. We’re known for tasty food, big portions and fair prices. I also love making merit and releasing birds and fish at the temple.","สวัสดี "+nm()+"! ฉันย้ายมาที่นี่ราวสามปีก่อน เพื่อรับช่วงต่อร้านนี้และเริ่มชีวิตบทใหม่ ร้านเราอร่อย ให้เยอะ ราคาเป็นกันเอง ฉันชอบทำบุญและปล่อยนกปล่อยปลาที่วัดด้วย")],
 ["🛕",L("Wat Phuttha Bucha","วัดพุทธบูชา"),L("I’m the heart of the community! People come to me for religious activities, markets and gatherings. Local farmers and newcomers helped build me, and families from the housing estates still come to make merit and donate.","ฉันคือหัวใจของชุมชน! ผู้คนมาทำกิจกรรมทางศาสนา ตลาด และพบปะกันที่นี่ ชาวสวนและคนจากที่อื่นช่วยกันสร้างวัด และชาวหมู่บ้านจัดสรรก็ยังมาทำบุญบริจาคอยู่เสมอ")],
 ["🛒",L("Local market","ตลาดชุมชน"),L("Shops and food stalls here sell affordable things, so everyone nearby can shop with ease.","ร้านค้าและแผงอาหารที่นี่ขายของราคาย่อมเยา ทุกคนในละแวกนี้จึงซื้อหาได้สบาย")],
 ["👴",L("Uncle Kae Sil","ลุง Kae Sil"),L("Ah, a KMUTT student! I was born here and I’ve lived here 72 years. Farming, gardening, traditional crafts, agricultural cooperatives… I’ve done it all. Come and interview me next!","อ้อ นักศึกษา มจธ.! ลุงเกิดที่นี่ อยู่มา 72 ปีแล้ว ทำสวน ทำเกษตร งานช่างพื้นบ้าน สหกรณ์การเกษตร ทำมาหมดเลย เดี๋ยวมาสัมภาษณ์ลุงต่อนะ")]];
- const got=new Set(),X=i=>22+i*21;
- box.innerHTML=`<h2>${L("1 · Discover","1 · สำรวจ")}</h2>${gd(L("Tap the glowing icons! Your student will walk over, and they’ll pop out to talk to you. 👆","แตะไอคอนที่เรืองแสงเลย! นักศึกษาของเธอจะเดินไปหา แล้วไอคอนจะเด้งออกมาคุยด้วย 👆"),"g1")}<div class="stage"><div class="ground"></div><div class="road"></div>${P.map((p,i)=>`<div class="obj glow" style="left:${X(i)}%" data-i="${i}">${p[0]}</div>`).join("")}<div id="walker">${pl(78)}</div></div><p class="mute" id="pc">${L("Met 0 / 4","พบแล้ว 0 / 4")}</p>`;
+ const CARD=cardsData(),got=new Set(),X=i=>22+i*21;
+ box.innerHTML=`<h2>${L("1 · Discover","1 · สำรวจ")}</h2>${gd(L("Hmm, everything looks pale and faded… that’s how a place looks when we walk past in a hurry. Slow down and tap each glowing icon to notice it! 👆","อืม… ทุกอย่างดูซีดจางไปหมด นี่แหละภาพของที่ที่เราเดินผ่านอย่างรีบร้อน ลองช้าลงแล้วแตะไอคอนที่เรืองแสงเพื่อสังเกตดูสิ! 👆"),"g1")}<div class="stage gs" id="st1"><div class="world"><div class="ground"></div><div class="road"></div></div>${P.map((p,i)=>`<div class="obj glow gr" style="left:${X(i)}%" data-i="${i}">${p[0]}</div>`).join("")}<div id="walker">${pl(78)}</div></div><div class="cards">${CARD.map((c,i)=>`<div class="bc" id="bc${i}"><i>❔</i><b>?</b></div>`).join("")}</div><p class="mute" id="pc">${L("Noticed 0 / 4","สังเกตเห็นแล้ว 0 / 4")}</p>`;
  const nx=btn(L("Go to the interview","ไปสัมภาษณ์"),ch2,"c");nx.disabled=true;
- document.querySelectorAll(".obj").forEach(o=>o.onclick=()=>{const i=+o.dataset.i,p=P[i];$("#walker").style.left=(X(i)-9)+"%";
-  setTimeout(()=>dlg([[{s:p[0],n:p[1]},p[2]]],()=>{got.add(i);o.classList.remove("glow");o.classList.add("done");$("#pc").textContent=L("Met ","พบแล้ว ")+got.size+" / 4";const rem=4-got.size;$("#g1").textContent=rem?L("Great! "+rem+" more to meet. Let’s walk to the next one! 👆","เยี่ยม! เหลืออีก "+rem+" ที่ ไปหาคนต่อไปกัน! 👆"):L("You met everyone! Press the button to start the interview. 🎤","พบครบทุกคนแล้ว! กดปุ่มเพื่อไปสัมภาษณ์ 🎤");if(got.size==4)nx.disabled=false}),700)})}
+ document.querySelectorAll(".obj").forEach(o=>o.onclick=()=>{const i=+o.dataset.i,p=P[i],c=CARD[i];$("#walker").style.left=(X(i)-9)+"%";
+  setTimeout(()=>dlg([[{s:p[0],n:p[1]},p[2]],[G(),L("✨ Beauty card unlocked!\n"+c[0]+" "+c[1]+"\n"+c[2],"✨ ปลดล็อกการ์ดความงาม!\n"+c[0]+" "+c[1]+"\n"+c[2])]],()=>{
+   got.add(i);stat.cards.add(i);o.classList.remove("glow","gr");o.classList.add("done");
+   const b=$("#bc"+i);b.className="bc on";b.innerHTML=`<i>${c[0]}</i><b>${c[1]}</b>`;
+   $("#st1").style.setProperty("--gs",1-got.size/4);
+   $("#pc").textContent=L("Noticed ","สังเกตเห็นแล้ว ")+got.size+" / 4";
+   const rem=4-got.size;
+   $("#g1").textContent=rem?L("Look, more colour! "+rem+" more to notice. 👆","สีสันเริ่มกลับมาแล้ว! เหลืออีก "+rem+" ที่ 👆"):L("The whole street has colour now! That’s the beauty we almost walked past. 🌈 Press the button for the interview.","ถนนทั้งสายมีสีสันแล้ว! นี่คือความงามที่เราเกือบเดินผ่านไป 🌈 กดปุ่มเพื่อไปสัมภาษณ์");
+   if(got.size==4){nx.disabled=false;party(L("🌈 Full colour!","🌈 สีสันครบแล้ว!"))}}),700)})}
 
 /* 2 interview */
 function ch2(){prog(2);
@@ -274,26 +418,110 @@ function ch4(){prog(4);
  const ask=()=>{lock=false;miss=0;$("#gt").textContent=Q[q][0];$("#pc").textContent=L("Question "+(q+1)+" of "+Q.length+". Tap the right icon.","ข้อ "+(q+1)+" จาก "+Q.length+" แตะไอคอนที่ถูกต้อง")};
  document.querySelectorAll(".fl").forEach(o=>o.onclick=()=>{if(lock)return;
   if(o.textContent==Q[q][1]){lock=true;if(!tried)sc++;tried=false;q++;party();$("#gt").textContent=L("Honk! Correct, "+nm()+"!","ก๊าบ! ถูกต้อง "+nm()+"!");
-   setTimeout(()=>{if(q<Q.length)ask();else{$("#gt").textContent=L("You got "+sc+" of "+Q.length+" on the first try. Now lead the community!","ตอบถูกในครั้งแรก "+sc+" จาก "+Q.length+" ข้อ! ต่อไปมานำชุมชนกันเถอะ!");$("#pc").textContent="";$("#hb").remove();btn(L("Lead the community","นำชุมชน"),ch5,"c")}},1900)}
-  else{tried=true;o.classList.add("no");setTimeout(()=>o.classList.remove("no"),400);miss++;$("#gt").textContent=L("Hmm, not that one! 🤔","อืม… ไม่ใช่นะ! 🤔")+"\n\n"+Q[q][0]+(miss>=2?"\n\n💡 "+H[q]:"")}});
- ask();$("#hb").onclick=()=>{if(lock)return;tried=true;$("#gt").textContent=Q[q][0]+"\n\n💡 "+H[q]}}
+   setTimeout(()=>{if(q<Q.length)ask();else{stat.sc=sc;stat.qn=Q.length;$("#gt").textContent=L("You got "+sc+" of "+Q.length+" on the first try. Now let’s connect the community!","ตอบถูกในครั้งแรก "+sc+" จาก "+Q.length+" ข้อ! ต่อไปมาเชื่อมชุมชนกันเถอะ!");$("#pc").textContent="";$("#hb").remove();btn(L("Connect the community","เชื่อมชุมชน"),ch5,"c")}},1900)}
+  else{tried=true;o.classList.add("no");setTimeout(()=>o.classList.remove("no"),400);miss++;if(miss==2)stat.hints++;$("#gt").textContent=L("Hmm, not that one! 🤔","อืม… ไม่ใช่นะ! 🤔")+"\n\n"+Q[q][0]+(miss>=2?"\n\n💡 "+H[q]:"")}});
+ ask();$("#hb").onclick=()=>{if(lock)return;tried=true;stat.hints++;$("#gt").textContent=Q[q][0]+"\n\n💡 "+H[q]}}
 
-/* 5 keep & grow */
-function ch5(){prog(5);let m=[50,50,50],r=0;
- const R=[
-["🛕",L("{n}, a new housing estate wants to join the temple fair!","{n} หมู่บ้านจัดสรรใหม่อยากมาร่วมงานวัด!"),[[L("Invite everyone to help build it","ชวนทุกคนมาช่วยกันจัดงาน"),[10,5,20],L("The newcomers pitch in. Old and new neighbours become friends.","คนใหม่มาช่วยกันเต็มที่ เพื่อนบ้านเก่าและใหม่กลายเป็นเพื่อนกัน")],[L("Keep it for locals only","จัดเฉพาะคนในพื้นที่"),[20,-10,-15],L("Tradition is safe, but newcomers feel unwelcome.","ประเพณียังอยู่ แต่คนใหม่รู้สึกไม่ได้รับเชิญ")],[L("Move the fair to the estate","ย้ายงานไปจัดที่หมู่บ้านจัดสรร"),[-15,20,-5],L("A big crowd, but some old customs fade.","คนมาเยอะ แต่ธรรมเนียมเก่าบางอย่างจางหาย")]]],
-["👴",L("The factories pollute the air and water, {n}. People are upset.","โรงงานทำให้อากาศและน้ำเสีย {n} ผู้คนไม่พอใจกัน"),[[L("Ask factories to clean up, together","ชวนโรงงานมาแก้ปัญหาร่วมกัน"),[5,10,15],L("Talks are slow, but the air improves and trust grows.","เจรจาช้าหน่อย แต่อากาศดีขึ้นและความไว้ใจเพิ่มขึ้น")],[L("Demand they close","เรียกร้องให้ปิด"),[10,-20,-5],L("The air clears, but many jobs are lost.","อากาศสะอาดขึ้น แต่หลายคนตกงาน")],[L("Ignore it for now","ปล่อยไว้ก่อน"),[-5,15,-15],L("Business stays busy, but neighbours grow tired.","ธุรกิจยังคึกคัก แต่เพื่อนบ้านเริ่มเหนื่อยใจ")]]],
-["🍜",L("Rents are rising and my prices are under pressure. Help, {n}!","ค่าเช่าขึ้น ราคาอาหารของฉันกำลังแย่ ช่วยด้วย {n}!"),[[L("Support small shops and fair prices","สนับสนุนร้านเล็กและราคายุติธรรม"),[10,5,15],L("Big portions at kind prices stay alive.","อาหารจานใหญ่ราคาเป็นกันเองยังอยู่ต่อไป")],[L("Let the market decide","ปล่อยให้ตลาดตัดสิน"),[-10,15,-10],L("New shops open, but old favourites close.","ร้านใหม่เปิด แต่ร้านโปรดเก่าๆ ปิดตัว")],[L("Build a small market at the temple","สร้างตลาดเล็กๆ ที่วัด"),[15,10,10],L("The temple becomes a meeting place again.","วัดกลับมาเป็นที่พบปะอีกครั้ง")]]],
-["👴",L("Some farmers are offered money to sell their orchards.","ชาวสวนบางคนถูกเสนอเงินให้ขายสวน"),[[L("Help them keep their orchards","ช่วยให้เก็บสวนไว้"),[20,-10,5],L("Green land stays, and so do old skills.","พื้นที่สีเขียวยังอยู่ ภูมิปัญญาเก่าก็ยังอยู่")],[L("Support the sale","สนับสนุนให้ขาย"),[-20,20,-5],L("New homes rise, and the orchards disappear.","บ้านใหม่เกิดขึ้น สวนก็หายไป")],[L("Start a farmers’ cooperative","ตั้งสหกรณ์ชาวสวน"),[10,5,15],L("Like Uncle Kae Sil, farmers help each other.","เหมือนลุง Kae Sil ชาวสวนช่วยเหลือกัน")]]]];
- const bars=()=>m.forEach((v,i)=>$("#b"+i).style.width=v+"%");
- const draw=()=>{const x=R[r];box.innerHTML=`<h2>${L("5 · Keep & Grow","5 · รักษาและเติบโต")}</h2><p class="mute">${L("Round "+(r+1)+" of "+R.length+" · imagined situations","รอบที่ "+(r+1)+" จาก "+R.length+" · สถานการณ์สมมติ")}</p>${r==0?gd(L("Pick what you think is best, and watch the three bars change! 👇","เลือกสิ่งที่คิดว่าดีที่สุด แล้วดูแถบทั้งสามเปลี่ยนไป! 👇")):""}<div class="meter">🛕 ${L("Tradition","ประเพณี")}<div class="bar"><i id="b0"></i></div></div><div class="meter">🏙 ${L("Growth","การเติบโต")}<div class="bar"><i id="b1"></i></div></div><div class="meter">🤝 ${L("Connection","ความผูกพัน")}<div class="bar"><i id="b2"></i></div></div><div class="gq"><div class="big2">${x[0]}</div><div class="bub2" id="q">${esc(x[1].replace("{n}",nm()))}</div></div>`;bars();
-  x[2].forEach(c=>btn(c[0],()=>{c[1].forEach((d,i)=>m[i]=Math.max(0,Math.min(100,m[i]+d)));bars();box.querySelectorAll(".btn").forEach(b=>b.remove());$("#q").textContent=c[2];
-   btn(r<R.length-1?L("Next","ถัดไป"):L("See what we discovered","ดูสิ่งที่เราค้นพบ"),()=>{r++;r<R.length?draw():end(m)},"c")},"ghost"))};draw()}
+/* 5 connect the community */
+function ch5(){prog(5);
+ const N=[
+  {e:"🌴",x:17,y:20,n:L("Farmers & orchard families","ชาวสวนและครอบครัวเกษตร"),t:L("Local people and farmers helped build the temple, and everyone mingled together.","คนในพื้นที่และชาวสวนช่วยกันสร้างวัด และทุกคนก็ผสมผสานกลมกลืนกัน")},
+  {e:"🏭",x:83,y:20,n:L("Factory workers","คนทำงานโรงงาน"),t:L("Factories now stand among old villages and housing estates, yet people here still keep a fair amount of connection with one another.","ตอนนี้โรงงานอยู่ท่ามกลางชุมชนเก่าและหมู่บ้านจัดสรร แต่ผู้คนที่นี่ก็ยังมีความเชื่อมโยงกันพอสมควร")},
+  {e:"🏘️",x:17,y:80,n:L("Housing estate families","ครอบครัวหมู่บ้านจัดสรร"),t:L("People from the housing estates come to make merit and donate, helping the temple grow and prosper.","ผู้คนจากหมู่บ้านจัดสรรมาทำบุญบริจาค ช่วยให้วัดเจริญรุ่งเรือง")},
+  {e:"🍜",x:83,y:80,n:L("Newcomers, like the food shop owner","คนใหม่ อย่างเจ้าของร้านอาหาร"),t:L("People from other places came and mingled in too. The food shop owner makes merit and releases birds and fish at the temple.","คนจากที่อื่นก็เข้ามาผสมผสานด้วย เจ้าของร้านอาหารชอบทำบุญและปล่อยนกปล่อยปลาที่วัด")}];
+ const ring=[[0,2],[2,3],[3,1],[1,0]];
+ box.innerHTML=`<h2>${L("5 · Connect the community","5 · เชื่อมชุมชน")}</h2>${gd(L("Everyone here is connected through the temple. Tap each group to link it to the temple and hear how! 🛕","ทุกคนที่นี่เชื่อมโยงกันผ่านวัด แตะแต่ละกลุ่มเพื่อเชื่อมกับวัดและฟังว่าเชื่อมกันอย่างไร! 🛕"),"g5")}<div class="net" id="net"><svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none">${ring.map(r=>`<line class="rg" x1="${N[r[0]].x}" y1="${N[r[0]].y}" x2="${N[r[1]].x}" y2="${N[r[1]].y}"/>`).join("")}${N.map((n,i)=>`<line id="ln${i}" x1="${n.x}" y1="${n.y}" x2="50" y2="50"/>`).join("")}</svg><button class="nd tp" id="tp"><span>🛕</span><small>${L("Wat Phuttha Bucha","วัดพุทธบูชา")}</small></button>${N.map((n,i)=>`<button class="nd" data-i="${i}" style="left:${n.x}%;top:${n.y}%"><span>${n.e}</span><small>${n.n}</small></button>`).join("")}</div><p class="mute" id="pc5">${L("Connected 0 / 4","เชื่อมแล้ว 0 / 4")}</p>`;
+ const on=new Set(),net=$("#net"),say=x=>$("#g5").textContent=x;
+ const nx=btn(L("Almost done!","ใกล้เสร็จแล้ว!"),reflect,"c");nx.disabled=true;
+ net.querySelectorAll(".nd:not(.tp)").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,n=N[i];
+  dlg([[{s:n.e,n:n.n},n.t]],()=>{on.add(i);b.classList.add("on");$("#ln"+i).classList.add("on");
+   $("#pc5").textContent=L("Connected ","เชื่อมแล้ว ")+on.size+" / 4";
+   if(on.size<4)say(L("Linked! "+(4-on.size)+" more groups to go. 👆","เชื่อมแล้ว! เหลืออีก "+(4-on.size)+" กลุ่ม 👆"));
+   else{net.classList.add("all");say(L("Everyone is connected through the temple, and they mingle with each other too! 🛕✨ Tap the temple to hear its story.","ทุกคนเชื่อมโยงกันผ่านวัด และยังผสมผสานกับคนอื่น ๆ ด้วย! 🛕✨ แตะที่วัดเพื่อฟังเรื่องราวของวัด"));party(L("🛕 Connected!","🛕 เชื่อมกันแล้ว!"));nx.disabled=false}})});
+ $("#tp").onclick=()=>{if(on.size<4)return say(L("Link all four groups first! 👆","เชื่อมทั้งสี่กลุ่มก่อนนะ! 👆"));
+  dlg([[{s:"🛕",n:L("Wat Phuttha Bucha","วัดพุทธบูชา")},L("Communities grew gradually around Buddhist temples, and the temples developed along with them.","ชุมชนค่อย ๆ เติบโตขึ้นรอบวัด และวัดก็พัฒนาไปพร้อมกัน")]])}}
 
-function end(m){const a=(m[0]+m[1]+m[2])/3,t=m[2]>=75?["🌟",L("A Community of Stories","ชุมชนแห่งเรื่องเล่า"),L("You kept people connected, and that is where the beauty lives.","เธอทำให้ผู้คนยังผูกพันกัน ความงามอยู่ตรงนั้นเอง")]:a>=55?["🙂",L("A Community in Balance","ชุมชนที่สมดุล"),L("Old and new live side by side, and the temple still brings people together.","เก่าและใหม่อยู่เคียงกัน และวัดยังรวมใจผู้คน")]:["🌱",L("A Community Still Growing","ชุมชนที่ยังเติบโต"),L("Change is never simple. Listening to people is the first step.","การเปลี่ยนแปลงไม่เคยง่าย การรับฟังผู้คนคือก้าวแรก")];
- party(L("🎓 Well done!","🎓 เก่งมาก!"));
- box.innerHTML=`<h1>${t[0]} ${t[1]}</h1><p>${t[2]}</p><div class="cert"><div style="display:flex;justify-content:center;gap:14px;align-items:flex-end">${pl(90)}${goose(80)}</div><p style="margin:12px 0 0"><b>${L("Fieldwork Explorer","นักสำรวจภาคสนาม")}</b><br>${esc(nm())}<br><span class="mute">${L("KMUTT · Wat Phuttha Bucha, Bang Mot","มจธ. · วัดพุทธบูชา บางมด")}</span></p></div><p>${L("We discovered that Wat Phuttha Bucha is a community with a rich history and diverse lifestyles. Although it has changed from an agricultural area into a more developed urban community, its traditions, religious activities, and strong connections among people remain. We learned that the true beauty of a community lies in its people, culture, and shared memories.","เราค้นพบว่าวัดพุทธบูชาเป็นชุมชนที่มีประวัติศาสตร์ที่เปี่ยมด้วยเรื่องราวและวิถีชีวิตที่หลากหลาย แม้จะเปลี่ยนจากพื้นที่เกษตรกรรมเป็นชุมชนเมืองที่พัฒนาขึ้น แต่ประเพณี กิจกรรมทางศาสนา และความผูกพันที่แน่นแฟ้นระหว่างผู้คนก็ยังคงอยู่ เราได้เรียนรู้ว่าความงามที่แท้จริงของชุมชนอยู่ที่ผู้คน วัฒนธรรม และความทรงจำร่วมกัน")}</p><p>${L("The food shop owner represents courage and new beginnings, while Uncle Kae Sil represents the history and development of the community.","เจ้าของร้านอาหารเป็นตัวแทนของความกล้าและการเริ่มต้นใหม่ ส่วนลุง Kae Sil เป็นตัวแทนของประวัติศาสตร์และการพัฒนาของชุมชน")}</p>`;
- btn(L("Play again","เล่นอีกครั้ง"),pick,"c")}
+/* reflection */
+function reflect(){prog(5);
+ const K=["people","culture","memories"];
+ box.innerHTML=`<h2>${L("One last thing…","สุดท้ายแล้ว…")}</h2>${gd(L("What beauty did you almost walk past, "+nm()+"? Pick one, and add your own words if you like!","เธอเกือบเดินผ่านความงามอะไรไปบ้าง "+nm()+"? เลือกหนึ่งข้อ แล้วเขียนเพิ่มด้วยคำพูดของเธอเองก็ได้!"))}<div class="chips">${K.map(k=>`<button class="chip" data-k="${k}"><span>${chipOf(k)[0]}</span>${chipOf(k)[1]}</button>`).join("")}</div><input type="text" id="ln" maxlength="70" placeholder="${L("In my own words (optional)","คำพูดของฉันเอง (ไม่บังคับ)")}">`;
+ const go=btn(L("Get my certificate 🎓","รับใบประกาศของฉัน 🎓"),()=>{stat.line=$("#ln").value.trim();finale()},"c");go.disabled=true;
+ const chk=()=>go.disabled=!(stat.chip||$("#ln").value.trim());
+ box.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{stat.chip=b.dataset.k;box.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x==b));chk()});
+ $("#ln").oninput=chk}
+
+/* certificate image */
+let lastCert=null;
+const svgImg=svg=>new Promise(res=>{const vb=svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/),h=+svg.match(/height="(\d+)"/)[1],w=Math.round(h*vb[1]/vb[2]);
+ const im=new Image();im.onload=()=>res(im);im.onerror=()=>res(null);
+ im.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg.replace("<svg ",`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" `))});
+const rr=(x,a,b,w,h,r)=>{x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()};
+const wrapT=(x,t,mw)=>{const seg=(window.Intl&&Intl.Segmenter)?[...new Intl.Segmenter(lang=="th"?"th":"en",{granularity:"word"}).segment(t)].map(q=>q.segment):t.split(/(\s+)/);
+ const out=[];let cur="";seg.forEach(w=>{if(x.measureText(cur+w).width>mw&&cur.trim()){out.push(cur.trim());cur=w.replace(/^\s+/,"")}else cur+=w});if(cur.trim())out.push(cur.trim());return out};
+async function certCanvas(){
+ const d=lastCert,W=1080,F='"Noto Sans Thai",system-ui,sans-serif',C=document.createElement("canvas");C.width=W;C.height=2600;const x=C.getContext("2d");
+ try{await Promise.all([document.fonts.load('700 40px "Noto Sans Thai"'),document.fonts.load('400 30px "Noto Sans Thai"'),document.fonts.load('600 30px "Noto Sans Thai"')])}catch(e){}
+ const [pi,gi]=await Promise.all([svgImg(pl(300)),svgImg(goose(260))]);
+ const cx=W/2;let y=120;x.textBaseline="alphabetic";
+ const T=(t,sz,col,wt,yy,al)=>{x.font=`${wt||400} ${sz}px ${F}`;x.fillStyle=col;x.textAlign=al||"center";x.fillText(t,al=="left"?150:cx,yy)};
+ const lines=(t,sz,col,wt,mw,lh,al)=>{x.font=`${wt||400} ${sz}px ${F}`;wrapT(x,t,mw).forEach(l=>{T(l,sz,col,wt,y,al);y+=lh})};
+ x.font=`700 28px ${F}`;const rw=x.measureText(CLASSN).width+90,g=x.createLinearGradient(0,y-40,0,y+30);g.addColorStop(0,"#FF8A2B");g.addColorStop(1,"#F26B0F");
+ rr(x,cx-rw/2,y-44,rw,68,34);x.fillStyle=g;x.fill();T(CLASSN,28,"#fff",700,y);
+ y+=78;T(L("OFFICIAL CERTIFICATE OF","ใบประกาศอย่างเป็นทางการด้าน"),26,"#7C6F66",600,y);
+ y+=92;T(L("Beauty Noticing","การสังเกตความงาม"),92,"#C2530A",700,y);
+ y+=56;T(L("This is to certify that","ขอรับรองว่า"),30,"#7C6F66",400,y);
+ y+=30;const pw=pi?pi.width:0,gw=gi?gi.width:0,gap=30,sx=cx-(pw+gw+gap)/2;
+ if(pi)x.drawImage(pi,sx,y,pw,300);if(gi)x.drawImage(gi,sx+pw+gap,y+40,gw,260);
+ x.font=`64px ${F}`;x.textAlign="left";x.fillStyle="#000";x.fillText("🏅",sx+pw+gap-6,y+250);
+ y+=300+95;let fs=88;while(fs>40){x.font=`700 ${fs}px ${F}`;if(x.measureText(d.name).width<=W-220)break;fs-=4}
+ const nw=x.measureText(d.name).width;T(d.name,fs,"#2A2522",700,y);
+ x.setLineDash([2,12]);x.lineWidth=7;x.lineCap="round";x.strokeStyle="#F58A2E";x.beginPath();x.moveTo(cx-nw/2-20,y+26);x.lineTo(cx+nw/2+20,y+26);x.stroke();x.setLineDash([]);
+ y+=88;lines(d.aw[0]+" "+d.aw[1],48,"#C2530A",700,W-200,60);
+ y+=2;lines(d.aw[2],32,"#5b4e44",400,W-220,48);
+ y+=16;d.qs.forEach(q=>{x.font=`400 32px ${F}`;wrapT(x,"✅ "+q,W-320).forEach((l,i)=>{T(l,32,"#2A2522",400,y,"left");y+=46})});
+ y+=10;const pills=["📖 "+L("Stories","เรื่องเล่า")+" "+d.stories+"/4","🧠 "+L("Quiz","ควิซ")+" "+d.sc+"/"+d.qn,"💡 "+L("Hints","คำใบ้")+" "+d.hints];
+ x.font=`600 28px ${F}`;const pwid=pills.map(t=>x.measureText(t).width+50),tot=pwid.reduce((a,b)=>a+b,0)+16*(pills.length-1);let px=cx-tot/2;
+ pills.forEach((t,i)=>{rr(x,px,y-38,pwid[i],58,29);x.fillStyle="#fff";x.fill();x.lineWidth=3;x.strokeStyle="#FFE3C7";x.setLineDash([]);x.stroke();x.font=`600 28px ${F}`;x.fillStyle="#2A2522";x.textAlign="left";x.fillText(t,px+25,y);px+=pwid[i]+16});
+ y+=60;const n=d.cards.length;if(n){const cw=Math.min(230,(W-200-(n-1)*16)/n),total=n*cw+(n-1)*16;let bx=cx-total/2;
+  d.cards.forEach(i=>{const gg=x.createLinearGradient(0,y,0,y+190);gg.addColorStop(0,"#FFF8EE");gg.addColorStop(1,"#FFE9D0");rr(x,bx,y,cw,190,22);x.fillStyle=gg;x.fill();x.lineWidth=4;x.strokeStyle="#FFA53D";x.stroke();
+   x.textAlign="center";x.font=`60px ${F}`;x.fillStyle="#000";x.fillText(d.CD[i][0],bx+cw/2,y+82);x.font=`700 24px ${F}`;x.fillStyle="#2A2522";
+   wrapT(x,d.CD[i][1],cw-24).slice(0,2).forEach((l,k)=>x.fillText(l,bx+cw/2,y+126+k*30));bx+=cw+16});y+=190+44}
+ if(d.ch||d.line){x.font=`400 34px ${F}`;const body=[];if(d.ch)body.push(["b",d.ch[0]+" "+d.ch[1]]);if(d.line)wrapT(x,"“"+d.line+"”",W-340).forEach(l=>body.push(["n",l]));
+  const bh=44+36+body.length*46+20;rr(x,110,y-30,W-220,bh,22);x.fillStyle="#fff";x.fill();x.fillStyle="#F58A2E";x.fillRect(110,y-10,10,bh-40);
+  T(L("The beauty I almost walked past:","ความงามที่ฉันเกือบเดินผ่าน:"),24,"#7C6F66",400,y+14,"left");let qy=y+60;
+  body.forEach(b=>{T(b[1],b[0]=="b"?36:34,"#2A2522",b[0]=="b"?700:400,qy,"left");qy+=46});y+=bh+30}
+ y+=70;x.save();x.translate(235,y);x.rotate(-10*Math.PI/180);const sg=x.createRadialGradient(0,0,10,0,0,100);sg.addColorStop(0,"#FFD23F");sg.addColorStop(1,"#F2A81D");
+ x.beginPath();x.arc(0,0,100,0,7);x.fillStyle=sg;x.fill();x.setLineDash([10,8]);x.lineWidth=5;x.strokeStyle="#C2530A";x.stroke();x.setLineDash([]);
+ if(gi)x.drawImage(gi,-34,-62,68,76);x.font=`700 15px ${F}`;x.fillStyle="#7a3a00";x.textAlign="center";x.fillText("OFFICIAL",0,40);x.fillText("GOOSE SEAL",0,58);x.restore();
+ x.textAlign="left";x.font=`400 30px ${F}`;x.fillStyle="#5b4e44";x.fillText(L("Signed,","ลงนาม"),385,y-10);x.font=`italic 700 42px 'Brush Script MT','Segoe Script',cursive,${F}`;x.fillStyle="#C2530A";x.fillText(L("The KMUTT Goose (honk!)","ห่านมจธ. (ก๊าบ!)"),385,y+48);
+ y+=170;T(L("Created by Group "+GRP,"จัดทำโดยกลุ่ม "+GRP),30,"#5b4e44",700,y);y+=44;T(CLASSN+" · KMUTT",28,"#5b4e44",400,y);
+ y+=52;lines(L("Not exchangeable for noodles. Valid for as long as you keep noticing.","ไม่สามารถแลกเป็นก๋วยเตี๋ยวได้ ใช้ได้ตราบเท่าที่เธอยังสังเกตความงามอยู่"),22,"#8A7B70",400,W-240,32);
+ const H=y+60,O=document.createElement("canvas");O.width=W;O.height=H;const o=O.getContext("2d");
+ const bg=o.createLinearGradient(0,0,0,H);bg.addColorStop(0,"#FFFDF8");bg.addColorStop(1,"#FFF1DC");o.fillStyle=bg;o.fillRect(0,0,W,H);
+ o.strokeStyle="#E8B93C";o.lineWidth=10;rr(o,14,14,W-28,H-28,34);o.stroke();o.lineWidth=4;rr(o,34,34,W-68,H-68,26);o.stroke();o.strokeStyle="#F58A2E";o.lineWidth=3;rr(o,48,48,W-96,H-96,20);o.stroke();
+ o.drawImage(C,0,0,W,H,0,0,W,H);return O}
+async function saveCert(){const b=$("#svb"),old=b.textContent;b.textContent=L("Making your image…","กำลังสร้างรูป…");b.disabled=true;
+ try{const c=await certCanvas(),blob=await new Promise(r=>c.toBlob(r,"image/png")),url=URL.createObjectURL(blob),fn=("certificate-"+me.n).replace(/[^\p{L}\p{M}\p{N}]+/gu,"-")+".png";
+  ov.style.display="flex";ov.innerHTML=`<div class="pop"><img class="svi" src="${url}" alt="certificate"><p class="svt">${L("Press and hold the image to save it, or tap Download.","กดค้างที่รูปเพื่อบันทึก หรือกดดาวน์โหลด")}</p><a class="btn c" download="${fn}" href="${url}">${L("📥 Download","📥 ดาวน์โหลด")}</a><button class="btn c ghost" id="svx">${L("Close","ปิด")}</button></div>`;$("#svx").onclick=hide}
+ catch(e){b.textContent=L("Couldn’t make the image. Please screenshot instead.","สร้างรูปไม่สำเร็จ กรุณาแคปหน้าจอแทน");setTimeout(()=>b.textContent=old,3000)}
+ finally{b.disabled=false;if(b.textContent==L("Making your image…","กำลังสร้างรูป…"))b.textContent=old}}
+
+/* certificate */
+function finale(){prog(5);const sc=stat.sc,qn=stat.qn,CD=cardsData();
+ const aw=stat.skips>=3?["⏩",L("Speed-Reader Extraordinaire","นักอ่านสปีดแสง"),L("Skipped the typing so fast, the goose is still catching its breath.","ข้ามข้อความเร็วจนห่านยังหอบอยู่เลย")]
+  :stat.hints>=2?["💡",L("Hint-Powered Explorer","นักสำรวจพลังคำใบ้"),L("Needed a little help. The goose forgives you (this time).","ต้องการตัวช่วยนิดหน่อย ห่านให้อภัย (ครั้งนี้)")]
+  :sc==qn?["🔍",L("Certified Beauty Detective","นักสืบความงามตัวจริง"),L("Noticed everything. The goose is proud, and a little suspicious.","สังเกตได้ทุกอย่าง ห่านภูมิใจ และแอบสงสัยนิดหน่อย")]
+  :sc>=4?["🪿",L("Professional Goose Follower","ผู้ติดตามห่านมืออาชีพ"),L("Followed the goose all the way. Excellent instincts.","ตามห่านมาตลอดทาง สัญชาตญาณเยี่ยม")]
+  :["🌱",L("Enthusiastic Beauty Beginner","ผู้เริ่มต้นสายสังเกตความงามที่กระตือรือร้น"),L("Still learning to notice. That’s exactly how it starts.","ยังหัดสังเกตอยู่ นั่นแหละคือจุดเริ่มต้น")];
+ const QS=[L("Survived 1 extremely heavy curtain","รอดจากม่านที่หนักมากหนึ่งผืน"),L("Officially stopped walking past things (mostly)","เลิกเดินผ่านสิ่งต่าง ๆ แล้วอย่างเป็นทางการ (ส่วนใหญ่)"),L("Can spot a coconut grove from 72 years away","มองเห็นสวนมะพร้าวได้ไกลถึง 72 ปี"),L("Honk fluency: intermediate","ภาษาห่าน: ระดับกลาง"),L("Has met the goose. The goose is delighted.","ได้พบห่านแล้ว ห่านดีใจมาก"),L("Now suspiciously hungry (blame the big portions)","หิวขึ้นมาแบบน่าสงสัย (โทษข้าวจานใหญ่)")];
+ const qs=[...QS].sort(()=>Math.random()-.5).slice(0,3),ch=stat.chip?chipOf(stat.chip):null;
+ const quote=(ch||stat.line)?`<div class="qt"><small>${L("The beauty I almost walked past:","ความงามที่ฉันเกือบเดินผ่าน:")}</small><br>${ch?ch[0]+" <b>"+ch[1]+"</b>":""}${stat.line?"<br>“"+esc(stat.line)+"”":""}</div>`:"";
+ lastCert={name:nm(),aw,qs,ch,line:stat.line,cards:[0,1,2,3].filter(i=>stat.cards.has(i)),CD,sc,qn,hints:stat.hints,stories:stat.cards.size};
+ party(L("🎓 Congratulations!","🎓 ยินดีด้วย!"));
+ box.innerHTML=`<div class="cert2" id="cert"><div class="rib">${CLASSN}</div><div class="c1">${L("OFFICIAL CERTIFICATE OF","ใบประกาศอย่างเป็นทางการด้าน")}</div><h1 class="c2">${L("Beauty Noticing","การสังเกตความงาม")}</h1><p class="c3">${L("This is to certify that","ขอรับรองว่า")}</p><div class="pair"><div>${pl(120)}</div><div class="gm">${goose(104)}<em>🏅</em></div></div><div class="nm2">${esc(nm())}</div><div class="aw"><span>${aw[0]}</span> ${aw[1]}</div><p class="jk">${aw[2]}</p><ul class="ql">${qs.map(x=>"<li>✅ "+x+"</li>").join("")}</ul><div class="stl"><span>📖 ${L("Stories","เรื่องเล่า")} ${stat.cards.size}/4</span><span>🧠 ${L("Quiz","ควิซ")} ${sc}/${qn}</span><span>💡 ${L("Hints","คำใบ้")} ${stat.hints}</span></div><div class="mini">${[0,1,2,3].map(i=>stat.cards.has(i)?`<div class="bc on"><i>${CD[i][0]}</i><b>${CD[i][1]}</b></div>`:"").join("")}</div>${quote}<div class="sg"><div class="seal">${goose(40)}<small>${L("OFFICIAL GOOSE SEAL","ตราห่านอย่างเป็นทางการ")}</small></div><div>${L("Signed,","ลงนาม")}<br><b class="sgn">${L("The KMUTT Goose (honk!)","ห่านมจธ. (ก๊าบ!)")}</b></div></div><div class="ft"><b>${L("Created by Group "+GRP,"จัดทำโดยกลุ่ม "+GRP)}</b><br>${CLASSN} · KMUTT</div><small class="fp">${L("Not exchangeable for noodles. Valid for as long as you keep noticing.","ไม่สามารถแลกเป็นก๋วยเตี๋ยวได้ ใช้ได้ตราบเท่าที่เธอยังสังเกตความงามอยู่")}</small></div><p class="mute" style="text-align:center;margin:12px 0">📸 ${L("Keep your certificate: save it as an image, or screenshot it!","เก็บใบประกาศไว้ได้เลย บันทึกเป็นรูป หรือแคปหน้าจอก็ได้!")}</p><div id="svh"></div><div class="msg2"><h2>${L("Our message","ข้อความจากพวกเรา")}</h2><p>${L("We discovered that Wat Phuttha Bucha is a community with a rich history and diverse lifestyles. Although it has changed from an agricultural area into a more developed urban community, its traditions, religious activities, and strong connections among people remain. We learned that the true beauty of a community lies in its people, culture, and shared memories.","เราค้นพบว่าวัดพุทธบูชาเป็นชุมชนที่มีประวัติศาสตร์ที่เปี่ยมด้วยเรื่องราวและวิถีชีวิตที่หลากหลาย แม้จะเปลี่ยนจากพื้นที่เกษตรกรรมเป็นชุมชนเมืองที่พัฒนาขึ้น แต่ประเพณี กิจกรรมทางศาสนา และความผูกพันที่แน่นแฟ้นระหว่างผู้คนก็ยังคงอยู่ เราได้เรียนรู้ว่าความงามที่แท้จริงของชุมชนอยู่ที่ผู้คน วัฒนธรรม และความทรงจำร่วมกัน")}</p><p>${L("The food shop owner represents courage and new beginnings, while Uncle Kae Sil represents the history and development of the community.","เจ้าของร้านอาหารเป็นตัวแทนของความกล้าและการเริ่มต้นใหม่ ส่วนลุง Kae Sil เป็นตัวแทนของประวัติศาสตร์และการพัฒนาของชุมชน")}</p><p class="mute" style="margin:0">${L("Presented by Group "+GRP+" · "+CLASSN,"นำเสนอโดยกลุ่ม "+GRP+" · "+CLASSN)}</p></div>`;
+ const sb=btn(L("📥 Save certificate as image","📥 บันทึกใบประกาศเป็นรูป"),saveCert,"c");sb.id="svb";$("#svh").appendChild(sb);
+ btn(L("Play again","เล่นอีกครั้ง"),pick,"c ns")}
+
 pick();
 </script>
 </body>
