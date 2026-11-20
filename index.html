@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Beauty We Walked Past</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{/* change --acc / --acc2 here to the official KMUTT orange */--bg:#FFFFFF;--card:#FFFFFF;--ink:#2A2522;--mute:#8A7B70;--line:#FFD9BF;--acc:#D95F0E;--acc2:#F58A2E;--bad:#B4533A;--sky:#FFF1E3;--grass:#F9D3A8;--road:#E8B98A;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1B1511;--card:#251D17;--ink:#F6EBE2;--mute:#B79F8C;--line:#4A3626;--acc:#FF8A3D;--acc2:#FFB067;--sky:#3A2A1E;--grass:#5A4128;--road:#6F5236}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:'Noto Sans Thai',system-ui,sans-serif;line-height:2;letter-spacing:.02em;font-size:17px}
+main{max-width:520px;margin:0 auto;padding:26px 22px 70px}
+.steps{display:flex;gap:8px;margin-bottom:26px}
+.steps i{flex:1;height:8px;border-radius:8px;background:var(--line)}
+.steps i.on{background:var(--acc2)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:26px 22px}
+h1{font-size:24px;line-height:1.6;margin:0 0 14px}
+h2{font-size:20px;line-height:1.6;margin:0 0 10px}
+p{margin:0 0 20px}
+.mute{color:var(--mute);font-size:15px}
+.stage{position:relative;height:190px;border-radius:16px;overflow:hidden;background:var(--sky);margin:18px 0}
+.ground{position:absolute;left:0;right:0;bottom:0;height:56px;background:var(--grass)}
+.road{position:absolute;left:0;right:0;bottom:0;height:22px;background:var(--road)}
+.obj{position:absolute;bottom:40px;font-size:46px;line-height:1;cursor:pointer;transform:translateX(-50%)}
+.obj.done{opacity:.5}
+.glow{animation:pulse 1.4s infinite}
+@keyframes pulse{50%{transform:translateX(-50%) scale(1.2)}}
+#walker{position:absolute;bottom:22px;left:6%;transition:left .65s ease;transform:translateX(-50%);line-height:0}
+.btn{display:block;width:100%;font:inherit;line-height:1.8;color:#fff;background:var(--acc);border:0;border-radius:14px;padding:14px 18px;cursor:pointer;margin-top:14px;text-align:left}
+.btn.c{text-align:center;font-weight:600}
+.btn.ghost{background:var(--bg);color:var(--ink);border:2px solid var(--line)}
+.btn.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.btn[disabled]{opacity:.4;cursor:default}
+.row{display:flex;gap:10px}
+input[type=text]{width:100%;font:inherit;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);margin-top:14px}
+.lay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-around;padding-bottom:36px;font-size:34px;pointer-events:none}
+.slw{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+.slw b{font-size:24px;cursor:pointer;background:var(--bg);border:2px solid var(--line);border-radius:12px;width:46px;height:46px;display:grid;place-items:center;user-select:none}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:18px;border-radius:18px;background:linear-gradient(90deg,#FFC48A,var(--acc));outline:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:46px;height:46px;border-radius:50%;background:#fff;border:5px solid var(--acc);box-shadow:0 3px 10px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;background:#fff;border:5px solid var(--acc)}
+.hint{text-align:center;font-weight:600;color:var(--acc);animation:nudge 1.2s infinite}
+@keyframes nudge{50%{transform:translateX(8px)}}
+.hint.off{display:none}
+.era{display:flex;justify-content:space-between;color:var(--mute);font-size:14px}
+.meter{margin:12px 0;font-size:15px}
+.bar{height:10px;background:var(--line);border-radius:10px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;width:50%;background:var(--acc2);transition:width .6s}
+.gq{display:flex;gap:12px;align-items:center;margin:14px 0}
+.bub2{flex:1;background:var(--sky);border:2px solid var(--ink);border-radius:18px;padding:10px 14px;line-height:1.7;min-height:72px}
+.big2{font-size:56px;line-height:1}
+.fl{position:absolute;font-size:46px;cursor:pointer;animation:fl 3s ease-in-out infinite alternate}
+@keyframes fl{to{transform:translateY(-14px)}}
+.fl.no{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+.ov{position:fixed;inset:0;background:rgba(30,16,6,.8);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;overflow:auto}
+.pop{width:100%;max-width:420px;text-align:center}
+.bub{position:relative;background:#fff;color:#2A2522;border:3px solid #2A2522;border-radius:24px;padding:16px 20px;text-align:left;margin-bottom:26px;min-height:120px;animation:pop .35s}
+.bub:after{content:"";position:absolute;bottom:-17px;left:50%;margin-left:-14px;border:14px solid transparent;border-top-color:#2A2522;border-bottom:0}
+.bub b{color:#D95F0E;display:block;font-size:15px}
+.bub div{white-space:pre-line}
+.big{font-size:110px;line-height:1.1;animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+.big.hop{animation:pop .6s cubic-bezier(.2,1.6,.4,1),hop 1s .6s infinite}
+@keyframes hop{50%{transform:translateY(-18px) rotate(-4deg)}}
+.big svg{display:block;margin:0 auto}
+@keyframes pop{from{transform:scale(.1) translateY(80px);opacity:0}}
+.party{position:fixed;inset:0;pointer-events:none;z-index:99;overflow:hidden}
+.party i{position:absolute;top:-20px;width:10px;height:16px;animation:fall 2s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.party b{position:absolute;top:38%;left:0;right:0;text-align:center;font-size:46px;color:#fff;text-shadow:0 3px 12px #000;animation:pop .6s}
+.cert{border:3px double var(--acc);border-radius:16px;padding:20px 14px;text-align:center;margin:18px 0}
+/* ===== responsive: phone (default) / tablet / desktop ===== */
+:root{--sh:190px;--sh2:240px;--gh:56px;--ob:46px;--ly:34px;--bgsz:110px;--bgs:150px;--wh:78px;--pw:420px;--gq:76px;--pv:150px}
+.stage{height:var(--sh)}
+.stage.tall{height:var(--sh2)}
+.ground{height:var(--gh)}
+.road{height:calc(var(--gh)*.4)}
+.obj{bottom:calc(var(--gh) - 16px);font-size:var(--ob)}
+.fl{font-size:var(--ob)}
+#ei{font-size:calc(var(--ob)*1.15)}
+#walker{bottom:calc(var(--gh) - 34px)}
+#walker svg{height:var(--wh)}
+.lay{font-size:var(--ly);padding-bottom:calc(var(--gh) - 20px)}
+.big{font-size:var(--bgsz)}
+.big svg{height:var(--bgs)}
+.pop{max-width:var(--pw)}
+.gq svg{height:var(--gq)}
+#pv svg{height:var(--pv)}
+.ov{align-items:flex-start}
+.pop{margin:auto}
+@media (hover:hover){.btn:hover{filter:brightness(1.08)}.btn.ghost:hover{border-color:var(--acc)}.obj:hover,.fl:hover{filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}}
+@media (max-width:420px){main{padding:18px 14px 60px}.card{padding:20px 16px}}
+@media (min-width:640px){
+:root{--sh:260px;--sh2:320px;--gh:72px;--ob:60px;--ly:46px;--bgsz:140px;--bgs:190px;--wh:104px;--pw:520px;--gq:96px;--pv:190px}
+body{font-size:18px}
+main{max-width:720px;padding:36px 32px 80px}
+.card{padding:34px 32px}
+h1{font-size:28px}h2{font-size:23px}
+.bub{font-size:19px}
+.card>.btn,.card>.row,.card>input[type=text],#ac .btn{max-width:520px;margin-left:auto;margin-right:auto}
+}
+@media (min-width:1024px){
+:root{--sh:340px;--sh2:400px;--gh:90px;--ob:72px;--ly:56px;--bgsz:160px;--bgs:230px;--wh:128px;--pw:680px;--gq:110px;--pv:220px}
+body{font-size:19px}
+main{max-width:900px;padding:44px 40px 90px}
+.card{padding:44px}
+h1{font-size:34px}h2{font-size:26px}
+.bub{font-size:21px;padding:22px 26px}
+}
+@media (max-height:520px) and (orientation:landscape){
+:root{--sh:150px;--sh2:190px;--gh:44px;--ob:38px;--ly:28px;--bgsz:70px;--bgs:96px;--wh:60px;--pw:520px}
+main{padding:14px 22px 40px}
+.bub{min-height:70px;margin-bottom:22px}
+}
+/* ===== fresh theme + goose guide ===== */
+:root{--bg:#FFFFFF;--card:#FFFFFF;--ink:#2B2320;--mute:#7C6F66;--line:#FFE3C7;--acc:#F26B0F;--acc2:#FFA53D;--sky:#7FD0FF;--grass:#8ADB6A;--road:#CFC7BB;--bub:#FFF8EE}
+body{background:radial-gradient(circle at 100% 0,#FFE2B8 0,rgba(255,226,184,0) 38%),radial-gradient(circle at 0 100%,#FFD2A6 0,rgba(255,210,166,0) 34%),#fff;background-attachment:fixed;min-height:100vh}
+.card{border:0;box-shadow:0 12px 36px rgba(242,107,15,.18),0 2px 6px rgba(0,0,0,.05)}
+.steps i{height:10px}
+.steps i.on{background:linear-gradient(90deg,var(--acc2),var(--acc))}
+.btn,.btn.on{background:linear-gradient(180deg,#FF8A2B,#F26B0F);box-shadow:0 4px 0 #C2530A;font-weight:600}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #C2530A}
+.btn.ghost{background:var(--bg);color:var(--ink);border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.btn.ghost:active{box-shadow:0 0 0 var(--line)}
+.btn[disabled]{box-shadow:none}
+.stage{background:linear-gradient(#7FD0FF,#E3F6FF)}
+.stage:before{content:"";position:absolute;top:12px;right:16px;width:32px;height:32px;border-radius:50%;background:#FFD23F;box-shadow:0 0 0 8px rgba(255,210,63,.35)}
+.stage:after{content:"☁️";position:absolute;top:10px;left:10%;font-size:30px;pointer-events:none}
+.ground{background:linear-gradient(#A6E884,#6CC94E)}
+.road{background:#CFC7BB}
+.bub2{position:relative;background:var(--bub);border:2px solid var(--acc);color:var(--ink)}
+.bub2:before{content:"";position:absolute;left:-10px;top:22px;border:8px solid transparent;border-right-color:var(--acc);border-left:0}
+.bar i{background:linear-gradient(90deg,var(--acc2),#FFD23F)}
+.slw b{border-color:var(--acc2)}
+input[type=range]{background:linear-gradient(90deg,#FFD23F,#FFA53D,#F26B0F)}
+.cert{background:linear-gradient(#FFF8EE,var(--card))}
+.ov{background:rgba(255,138,43,.55);backdrop-filter:blur(6px)}
+.gq.walk>div:first-child{animation:walkin 1.5s ease-out both,waddle .3s ease-in-out 5}
+.gq.walk .bub2{animation:fadein .4s 1.4s both}
+@keyframes walkin{from{transform:translateX(-140px);opacity:0}15%{opacity:1}to{transform:none}}
+@keyframes waddle{50%{rotate:7deg;translate:0 -6px}}
+@keyframes fadein{from{opacity:0;transform:scale(.9)}}
+.gw{position:relative;height:62px;margin:8px 0 0}
+#gg{position:absolute;bottom:0;left:0;line-height:0;transition:left .2s linear}
+#gg.mv{animation:waddle .25s infinite}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1410;--card:#2A1F18;--ink:#FFF3E8;--mute:#C8B3A2;--line:#523823;--sky:#1F4E7A;--grass:#3E8F4A;--road:#5A5248;--bub:#3A2A1E}
+body{background:var(--bg)}.stage{background:linear-gradient(#1F4E7A,#3B7BB0)}.ground{background:linear-gradient(#4CA65A,#2E7A3E)}}
+#gt{white-space:pre-line}
+#pv{background:radial-gradient(circle at 50% 42%,rgba(255,165,61,.4),transparent 62%)}
+/* ===== fit to screen height ===== */
+:root{--sh:clamp(150px,30vh,300px);--sh2:clamp(190px,36vh,360px);--gh:clamp(44px,8vh,84px);--ob:clamp(38px,min(7vh,10vw),70px);--ly:clamp(26px,min(5vh,8vw),52px);--wh:clamp(56px,min(11vh,17vw),124px);--bgsz:clamp(70px,16vh,150px);--bgs:clamp(96px,22vh,210px);--gq:clamp(56px,9vh,100px);--pv:clamp(110px,22vh,210px)}
+main{padding:clamp(12px,3vh,40px) clamp(14px,4vw,40px) 80px}
+.card{padding:clamp(16px,3vh,40px) clamp(16px,3vw,40px)}
+p{margin-bottom:clamp(10px,2vh,20px)}
+.meter{display:inline-block;width:32%;vertical-align:top;margin:8px 0;font-size:14px}
+.card>.btn.c:not(.ghost):last-child{position:sticky;bottom:12px;z-index:5;box-shadow:0 4px 0 #C2530A,0 10px 24px rgba(0,0,0,.18)}
+@media (max-height:760px){body{line-height:1.7}.btn{padding:10px 16px;margin-top:10px}.bub{min-height:90px;padding:12px 16px;margin-bottom:22px}h1{font-size:22px}h2{font-size:19px}}
+.stage{background:linear-gradient(#7FD0FF,#E3F6FF)}.ground{background:linear-gradient(#A6E884,#6CC94E)}
+#pv{background:radial-gradient(circle at 50% 45%,#FFF3E0 0,#FFE0BC 46%,transparent 68%)}
+.cert{background:linear-gradient(#FFF8EE,#FFE9D0);color:#2A2522}.cert .mute{color:#7C6F66}
+</style>
+</head>
+<body>
+<main>
+<div class="steps" id="steps"></div>
+<div class="card" id="box"></div>
+</main>
+<div class="ov" id="ov"></div>
+<script>
+const $=s=>document.querySelector(s),box=$("#box"),ov=$("#ov"),N=5;
+$("#steps").innerHTML="<i></i>".repeat(N);
+const prog=n=>{window.scrollTo(0,0);document.querySelectorAll("#steps i").forEach((e,i)=>e.classList.toggle("on",i<n))};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let lang="en",me={n:"",g:"m"};
+const L=(e,t)=>lang=="th"?t:e;
+const nm=()=>(lang=="th"?(me.g=="m"?"นาย":"น.ส."):(me.g=="m"?"Mr":"Ms"))+" "+me.n;
+const gd=(t,id)=>`<div class="gq walk"><div>${goose(76)}</div><div class="bub2"${id?` id="${id}"`:""}>${t}</div></div>`;
+function btn(t,f,cls){const b=document.createElement("button");b.className="btn "+(cls||"");b.textContent=t;b.onclick=f;box.appendChild(b);return b}
+
+/* sprites */
+const pl=(h=90)=>{const m=me.g!="f",O="#F26B0F",SK="#F2C9A0",HR="#1C1512",x=m?13:15,w=m?34:30,sl=m?5:7,sr=m?45:43;
+const sv=a=>`<rect x="${a}" y="36" width="10" height="16" rx="4" fill="#fff" stroke="#ddd"/><path d="M${a} 49L${a+10} 41V47L${a} 52z" fill="${O}"/>`;
+return `<svg viewBox="0 0 60 98" height="${h}">${m?`<g fill="${HR}"><circle cx="21" cy="11" r="6.5"/><circle cx="30" cy="8" r="7.5"/><circle cx="39" cy="11" r="6.5"/><circle cx="17" cy="18" r="4.5"/><circle cx="43" cy="18" r="4.5"/></g>`:`<path d="M14 24C12 2 48 2 46 24L47 38C43 40 41 36 41 32V22H19V32C19 36 17 40 13 38z" fill="${HR}"/>`}<ellipse cx="30" cy="96" rx="17" ry="2" fill="rgba(0,0,0,.15)"/><rect x="19" y="80" width="8" height="12" fill="${SK}"/><rect x="33" y="80" width="8" height="12" fill="${SK}"/><rect x="17" y="91" width="12" height="4" rx="2" fill="#fff" stroke="#ccc"/><rect x="31" y="91" width="12" height="4" rx="2" fill="#fff" stroke="#ccc"/><rect x="15" y="66" width="30" height="15" rx="3" fill="${O}"/><path d="M15 68H17.5V80H15zM42.5 68H45V80H42.5z" fill="#fff"/><rect x="15" y="66" width="30" height="2.4" rx="1" fill="#fff" opacity=".9"/><rect x="${sl+1}" y="52" width="8" height="14" rx="4" fill="${SK}"/><rect x="${sr+1}" y="52" width="8" height="14" rx="4" fill="${SK}"/><rect x="${x}" y="34" width="${w}" height="36" rx="6" fill="#fff" stroke="#ddd"/><path d="M${x} 58L${x+w*.55} 70H${x}z" fill="${O}"/><path d="M${x+w} 54L${x+w*.4} 70H${x+w}z" fill="#E5560A"/>${sv(sl)}${sv(sr)}<path d="M24 34Q30 42 36 34" stroke="${O}" stroke-width="2.2" fill="none"/><text x="30" y="49" font-size="6" text-anchor="middle" fill="#222" font-weight="700" font-family="sans-serif">KMUTT</text><rect x="20" y="50.5" width="20" height="1.2" fill="${O}"/><text x="30" y="63" font-size="14" text-anchor="middle" fill="#222" font-weight="700" font-family="sans-serif">67</text>${m?`<rect x="18" y="12" width="24" height="23" rx="10" fill="${SK}"/><path d="M18 17C20 10 40 10 42 17C38 14 22 14 18 17z" fill="${HR}"/><path d="M22.5 21.5H28M32 21.5H37.5" stroke="${HR}" stroke-width="1.6"/><circle cx="25.5" cy="25" r="1.3" fill="#222"/><circle cx="34.5" cy="25" r="1.3" fill="#222"/>`:`<ellipse cx="30" cy="23" rx="11.5" ry="11.5" fill="${SK}"/><path d="M18 17C22 10 38 10 42 17V22C36 18 24 18 18 22z" fill="${HR}"/><circle cx="25" cy="25" r="1.6" fill="#222"/><circle cx="35" cy="25" r="1.6" fill="#222"/><path d="M22.5 23.5l-1.2-.8M37.5 23.5l1.2-.8" stroke="#222" stroke-width=".8"/><circle cx="21.5" cy="29" r="2.2" fill="#F59E9E" opacity=".5"/><circle cx="38.5" cy="29" r="2.2" fill="#F59E9E" opacity=".5"/><g fill="none" stroke="#C0392B" stroke-width="1.3"><ellipse cx="25" cy="25" rx="4.2" ry="3.2"/><ellipse cx="35" cy="25" rx="4.2" ry="3.2"/><path d="M29.2 25h1.6"/></g>`}<path d="M27 30q3 2 6 0" stroke="#a0522d" fill="none" stroke-width="1"/></svg>`};
+const plOld=(h=90)=>{const f=me.g=="f",sk="#F2C9A0",hr=f?"#1B1216":"#1C1512",lg=f?sk:"#2b2b3a";
+return `<svg viewBox="0 0 60 96" height="${h}"><ellipse cx="30" cy="94" rx="17" ry="2.5" fill="rgba(0,0,0,.2)"/>${f?`<path d="M11 24C9 1 51 1 49 24L52 46C47 49 43 46 42 41V22H18V41C17 46 13 49 8 46z" fill="${hr}"/>`:`<ellipse cx="30" cy="13" rx="17.5" ry="13" fill="${hr}"/><path d="M18 6Q22 1 27 3Q32 .5 37 3Q42 2 43 8z" fill="${hr}"/><path d="M12.5 14C12 24 14 30 17 31L19 24L18 14zM47.5 14C48 24 46 30 43 31L41 24L42 14z" fill="${hr}"/>`}<rect x="19" y="68" width="9" height="26" rx="3" fill="${lg}"/><rect x="32" y="68" width="9" height="26" rx="3" fill="${lg}"/><rect x="8" y="52" width="8" height="14" rx="4" fill="${sk}"/><rect x="44" y="52" width="8" height="14" rx="4" fill="${sk}"/><rect x="15" y="34" width="30" height="36" rx="6" fill="#fff" stroke="#c9bcc0"/>${f?'<rect x="17" y="66" width="26" height="12" rx="4" fill="#1b1b22"/>':''}<rect x="7" y="36" width="10" height="16" rx="4" fill="#fff" stroke="#c9bcc0"/><rect x="43" y="36" width="10" height="16" rx="4" fill="#fff" stroke="#c9bcc0"/><rect x="7" y="48" width="10" height="4" fill="#7A1C2E"/><rect x="43" y="48" width="10" height="4" fill="#7A1C2E"/><path d="M22 34l8 10 8-10z" fill="#7A1C2E"/><path d="M25 34l5 7 5-7" stroke="#F28C28" stroke-width="2" fill="none"/><text x="30" y="60" font-size="7" text-anchor="middle" fill="#7A1C2E" font-weight="700" font-family="sans-serif">KMUTT</text><ellipse cx="30" cy="23" rx="11.5" ry="11.5" fill="${sk}"/>${f?`<path d="M18 23C19 10 27 10 30 14C33 10 41 10 42 23C38 18 33 17 30 20C27 17 22 18 18 23z" fill="${hr}"/><path d="M20 8Q30 3 40 8" stroke="#B0527A" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M10 38Q9 42 11 45M50 38Q51 42 49 45" stroke="#B0527A" stroke-width="1.2" fill="none" stroke-linecap="round"/><rect x="39" y="10" width="7" height="3.4" rx="1.7" fill="#F28C28" transform="rotate(-28 42 12)"/>`:`<path d="M30 9C24 10 19 14 17 25C21 19 25 16 30 15z" fill="${hr}"/><path d="M30 9C37 9 43 13 44 25C40 19 36 16 30 15z" fill="${hr}"/><path d="M26 14Q24.5 19 24 23M34 14Q35.5 19 36 23" stroke="${hr}" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M21 7Q30 3 39 8" stroke="#8A6E5C" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M24 12Q27 9 31 10" stroke="#8A6E5C" stroke-width="1" fill="none"/>`}<circle cx="25" cy="25" r="1.3" fill="#222"/><circle cx="35" cy="25" r="1.3" fill="#222"/><path d="M27 30q3 2 6 0" stroke="#a0522d" fill="none" stroke-width="1"/>${f?'<g fill="none" stroke="#C0392B" stroke-width="1.3"><ellipse cx="25" cy="25" rx="4.2" ry="3.2"/><ellipse cx="35" cy="25" rx="4.2" ry="3.2"/><path d="M29.2 25h1.6"/></g>':''}</svg>`};
+const goose=(h=90)=>`<svg viewBox="0 0 80 90" height="${h}"><rect x="30" y="76" width="4" height="10" fill="#F28C28"/><rect x="46" y="76" width="4" height="10" fill="#F28C28"/><ellipse cx="40" cy="62" rx="26" ry="19" fill="#fff" stroke="#2A2522" stroke-width="2"/><path d="M50 52C60 36 50 28 52 18" stroke="#2A2522" stroke-width="13" fill="none" stroke-linecap="round"/><path d="M50 52C60 36 50 28 52 18" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="52" cy="16" r="9" fill="#fff" stroke="#2A2522" stroke-width="2"/><path d="M59 15l14 4-14 5z" fill="#F28C28"/><circle cx="54" cy="13" r="1.8" fill="#2A2522"/><path d="M26 60q12-8 24 4q-12 10-24-4z" fill="#eee" stroke="#2A2522"/><path d="M47 40l-7-4v8zM47 40l7-4v8z" fill="#F28C28"/></svg>`;
+const G=()=>({s:goose(150),n:L("KMUTT Goose","ห่านมจธ."),h:1});
+
+/* popup talk */
+let T;
+function show(w,text,acts){ov.style.display="flex";ov.innerHTML=`<div class="pop"><div class="bub"><b>${w.n}</b><div id="tx"></div></div><div class="big ${w.h?"hop":""}">${w.s}</div><div id="ac"></div></div>`;
+ const tx=$("#tx"),a=[...text];let i=0;clearInterval(T);T=setInterval(()=>{tx.textContent+=a[i++]||"";if(i>=a.length)clearInterval(T)},22);
+ ov.querySelector(".bub").onclick=()=>{clearInterval(T);tx.textContent=text};
+ acts.forEach(([l,f])=>{const b=document.createElement("button");b.className="btn c";b.textContent=l;b.onclick=f;$("#ac").appendChild(b)})}
+const hide=()=>{clearInterval(T);ov.style.display="none"};
+function dlg(Ls,done,i=0){const last=i>=Ls.length-1;show(Ls[i][0],Ls[i][1],[[last?L("OK","ตกลง"):L("Next ▶","ถัดไป ▶"),()=>last?(hide(),done&&done()):dlg(Ls,done,i+1)]])}
+function party(t=L("🎉 Correct!","🎉 ถูกต้อง!")){const d=document.createElement("div");d.className="party";const c=["#F58A2E","#D95F0E","#7A1C2E","#FFC48A","#fff"];
+ d.innerHTML=Array.from({length:70},()=>`<i style="left:${Math.random()*100}%;background:${c[Math.random()*5|0]};animation-delay:${Math.random()*.6}s;animation-duration:${1.5+Math.random()}s"></i>`).join("")+"<b>"+t+"</b>";
+ document.body.appendChild(d);setTimeout(()=>d.remove(),2800)}
+
+/* start: language -> goose -> name */
+function pick(){prog(0);box.innerHTML=`<h1>🌏 Language · ภาษา</h1>`;
+ btn("English",()=>{lang="en";hello()},"c");btn("ไทย",()=>{lang="th";hello()},"c")}
+function hello(){dlg([[G(),L("Honk honk! Let’s go on fieldwork at Wat Phuttha Bucha in Bang Mot!","ก๊าบ ก๊าบ! ไปลงพื้นที่ที่วัดพุทธบูชา บางมด กันเถอะ!")],[G(),L("I’m the KMUTT goose. You’re a KMUTT student, and today you’ll meet the people here and find the beauty we usually walk past.","เราคือห่านประจำ มจธ. วันนี้เธอเป็นนักศึกษา มจธ. จะได้พบผู้คนที่นี่ และค้นหาความงามที่เรามักเดินผ่านโดยไม่ทันสังเกต")]],intro)}
+function intro(){prog(0);
+ box.innerHTML=`<h1>${L("Who is exploring today?","วันนี้ใครมาลงพื้นที่?")}</h1><div style="text-align:center" id="pv">${pl(150)}</div><div class="row"><button class="btn ghost c ${me.g=="m"?"on":""}" data-g="m">${L("Mr","นาย")}</button><button class="btn ghost c ${me.g=="f"?"on":""}" data-g="f">${L("Ms","นางสาว")}</button></div><input type="text" id="nm" placeholder="${L("Your first name","ชื่อของเธอ")}" maxlength="14" value="${esc(me.n)}">`;
+ box.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{me.g=b.dataset.g;box.querySelectorAll("[data-g]").forEach(x=>x.classList.toggle("on",x==b));$("#pv").innerHTML=pl(150)});
+ btn(L("Start the trip","เริ่มเลย"),()=>{me.n=$("#nm").value.trim()||L("Explorer","นักสำรวจ");
+  dlg([[G(),L("Nice to meet you, "+nm()+"! Tap the glowing icons to meet the people of Bang Mot.","ยินดีที่ได้รู้จัก "+nm()+"! แตะไอคอนที่เรืองแสงเพื่อไปพบผู้คนบางมดกันเลย")]],ch1)},"c")}
+
+/* 1 discover */
+function ch1(){prog(1);const P=[
+["🍜",L("Food shop owner","เจ้าของร้านอาหาร"),L("Hello, "+nm()+"! I moved here about three years ago to take over this shop and start a new chapter. We’re known for tasty food, big portions and fair prices. I also love making merit and releasing birds and fish at the temple.","สวัสดี "+nm()+"! ฉันย้ายมาที่นี่ราวสามปีก่อน เพื่อรับช่วงต่อร้านนี้และเริ่มชีวิตบทใหม่ ร้านเราอร่อย ให้เยอะ ราคาเป็นกันเอง ฉันชอบทำบุญและปล่อยนกปล่อยปลาที่วัดด้วย")],
+["🛕",L("Wat Phuttha Bucha","วัดพุทธบูชา"),L("I’m the heart of the community! People come to me for religious activities, markets and gatherings. Local farmers and newcomers helped build me, and families from the housing estates still come to make merit and donate.","ฉันคือหัวใจของชุมชน! ผู้คนมาทำกิจกรรมทางศาสนา ตลาด และพบปะกันที่นี่ ชาวสวนและคนจากที่อื่นช่วยกันสร้างวัด และชาวหมู่บ้านจัดสรรก็ยังมาทำบุญบริจาคอยู่เสมอ")],
+["🛒",L("Local market","ตลาดชุมชน"),L("Shops and food stalls here sell affordable things, so everyone nearby can shop with ease.","ร้านค้าและแผงอาหารที่นี่ขายของราคาย่อมเยา ทุกคนในละแวกนี้จึงซื้อหาได้สบาย")],
+["👴",L("Uncle Kae Sil","ลุง Kae Sil"),L("Ah, a KMUTT student! I was born here and I’ve lived here 72 years. Farming, gardening, traditional crafts, agricultural cooperatives… I’ve done it all. Come and interview me next!","อ้อ นักศึกษา มจธ.! ลุงเกิดที่นี่ อยู่มา 72 ปีแล้ว ทำสวน ทำเกษตร งานช่างพื้นบ้าน สหกรณ์การเกษตร ทำมาหมดเลย เดี๋ยวมาสัมภาษณ์ลุงต่อนะ")]];
+ const got=new Set(),X=i=>22+i*21;
+ box.innerHTML=`<h2>${L("1 · Discover","1 · สำรวจ")}</h2>${gd(L("Tap the glowing icons! Your student will walk over, and they’ll pop out to talk to you. 👆","แตะไอคอนที่เรืองแสงเลย! นักศึกษาของเธอจะเดินไปหา แล้วไอคอนจะเด้งออกมาคุยด้วย 👆"),"g1")}<div class="stage"><div class="ground"></div><div class="road"></div>${P.map((p,i)=>`<div class="obj glow" style="left:${X(i)}%" data-i="${i}">${p[0]}</div>`).join("")}<div id="walker">${pl(78)}</div></div><p class="mute" id="pc">${L("Met 0 / 4","พบแล้ว 0 / 4")}</p>`;
+ const nx=btn(L("Go to the interview","ไปสัมภาษณ์"),ch2,"c");nx.disabled=true;
+ document.querySelectorAll(".obj").forEach(o=>o.onclick=()=>{const i=+o.dataset.i,p=P[i];$("#walker").style.left=(X(i)-9)+"%";
+  setTimeout(()=>dlg([[{s:p[0],n:p[1]},p[2]]],()=>{got.add(i);o.classList.remove("glow");o.classList.add("done");$("#pc").textContent=L("Met ","พบแล้ว ")+got.size+" / 4";const rem=4-got.size;$("#g1").textContent=rem?L("Great! "+rem+" more to meet. Let’s walk to the next one! 👆","เยี่ยม! เหลืออีก "+rem+" ที่ ไปหาคนต่อไปกัน! 👆"):L("You met everyone! Press the button to start the interview. 🎤","พบครบทุกคนแล้ว! กดปุ่มเพื่อไปสัมภาษณ์ 🎤");if(got.size==4)nx.disabled=false}),700)})}
+
+/* 2 interview */
+function ch2(){prog(2);
+ box.innerHTML=`<h2>${L("2 · Interview","2 · สัมภาษณ์")}</h2>${gd(L("Uncle Kae Sil is waiting! Press the button, then tap a question to ask him. Tap his bubble to skip the typing. 🎤","ลุง Kae Sil รออยู่! กดปุ่ม แล้วแตะคำถามที่อยากถามลุง แตะที่ฟองคำพูดเพื่อข้ามการพิมพ์ได้ 🎤"))}<div class="stage"><div class="ground"></div><div class="road"></div><div class="obj glow" style="left:72%">👴</div><div id="walker" style="left:34%">${pl(78)}</div></div>`;
+ const A=[[L("How long have you lived here?","คุณลุงอยู่ที่นี่มากี่ปีแล้ว?"),L("I was born here. I’ve lived in this community for 72 years.","ลุงเกิดที่นี่ อยู่ในชุมชนนี้มา 72 ปีแล้ว")],[L("Has this place changed a lot?","ที่นี่เปลี่ยนไปมากไหม?"),L("It used to be farmland, mango groves and coconut groves. Now there are roads, factories and housing estates.","เมื่อก่อนเป็นที่เกษตร สวนมะม่วง สวนมะพร้าว ตอนนี้มีถนน โรงงาน และหมู่บ้านจัดสรร")],[L("What did people do for a living before?","สมัยก่อนคนที่นี่ทำมาหากินอะไร?"),L("Orchard work and farming. Some people made coconut sugar and sold coconuts. All small businesses.","ทำสวน ทำเกษตร บางคนทำน้ำตาลมะพร้าว ขายมะพร้าว เป็นธุรกิจเล็กๆ")],[L("Who helps build the temple?","ใครช่วยสร้างวัดบ้าง?"),L("Local farmers did, and so did people from outside. Now people from the housing estates make merit and donate too.","ชาวสวนในพื้นที่ช่วยกัน และคนจากที่อื่นก็มาช่วย ตอนนี้คนจากหมู่บ้านจัดสรรก็มาทำบุญบริจาคด้วย")]];
+ btn(L("Start the interview 🎤","เริ่มสัมภาษณ์ 🎤"),()=>{const U={s:"👴",n:L("Uncle Kae Sil","ลุง Kae Sil")},asked=new Set();
+  const turn=t=>{const acts=A.map((q,i)=>asked.has(i)?0:["💬 "+q[0],()=>{asked.add(i);turn(L("You: ","เธอ: ")+q[0]+"\n\n"+q[1]+(asked.size<4?"\n\n"+L("💬 "+(4-asked.size)+" more to ask!","💬 เหลืออีก "+(4-asked.size)+" คำถาม!"):""))}]).filter(Boolean);
+   show(U,t,acts.length?acts:[[L("Thank you, Uncle! 🙏","ขอบคุณลุง! 🙏"),()=>{hide();ch3()}]])};
+  turn(L("Welcome, "+nm()+". Please ask me anything.","ยินดีต้อนรับ "+nm()+" ถามได้เลยนะ"))},"c")}
+
+/* 3 then & now */
+function ch3(){prog(3);
+ const L4=[["🥥","🌴","🥭","🌳"],["🛣️","🌴","🏠","🛣️"],["🏭","🏭","🛣️","🏭"],["🏘️","🏢","🏘️","🛕"]];
+ const E=[
+["🥥",L("Long ago · Uncle Kae Sil’s younger days","สมัยก่อน · สมัยหนุ่มของลุง Kae Sil"),L("Coconut grove","สวนมะพร้าว"),L("Around here it was farmland, coconut groves, mango groves and orchards. People made coconut sugar and sold coconuts, all small businesses. This was Bang Mot subdistrict, Rat Burana district, Thonburi Province.","แถวนี้เคยเป็นที่เกษตร สวนมะพร้าว สวนมะม่วง และสวนผลไม้ ผู้คนทำน้ำตาลมะพร้าวและขายมะพร้าว เป็นธุรกิจเล็กๆ ที่นี่คือตำบลบางมด อำเภอราษฎร์บูรณะ จังหวัดธนบุรี")],
+["🛣️",L("1971 (BE 2514)","พ.ศ. 2514 (ค.ศ. 1971)"),L("The growing city","เมืองที่เติบโต"),L("In 1971, Phra Nakhon and Thonburi became Nakhon Luang Krung Thep Thonburi. A few years later they joined as Krung Thep Maha Nakhon. Tambon and amphoe became khwaeng and khet, and roads cut through the land.","พ.ศ. 2514 จังหวัดพระนครและธนบุรีรวมเป็นนครหลวงกรุงเทพธนบุรี อีกไม่กี่ปีต่อมารวมเป็นกรุงเทพมหานคร ตำบลและอำเภอกลายเป็นแขวงและเขต และมีถนนตัดผ่านพื้นที่")],
+["🏭",L("Factory era","ยุคโรงงาน"),L("The factories","โรงงาน"),L("Factories moved onto the old farmland. There was a time when people asked for them to close because of polluted air and water.","โรงงานเข้ามาอยู่บนที่เกษตรเก่า ช่วงหนึ่งมีเสียงเรียกร้องให้ปิดโรงงาน เพราะอากาศและน้ำเสีย")],
+["🏘️",L("Today","ปัจจุบัน"),L("Today’s community","ชุมชนวันนี้"),L("Roads and housing estates keep growing, yet old villages, factories and the temple live side by side. This is now Bang Mot khwaeng, Thung Khru khet, close to Bang Khun Thian, Chom Thong and Rat Burana.","ถนนและหมู่บ้านจัดสรรเพิ่มขึ้นเรื่อยๆ แต่ชุมชนเก่า โรงงาน และวัดก็อยู่ร่วมกัน ที่นี่คือแขวงบางมด เขตทุ่งครุ ใกล้บางขุนเทียน จอมทอง และราษฎร์บูรณะ")]];
+ box.innerHTML=`<h2>${L("3 · Then & Now","3 · อดีตถึงปัจจุบัน")}</h2>${gd(L("Drag the big circle to the right to travel through time! →","ลากวงกลมใหญ่ไปทางขวาเพื่อเดินทางข้ามเวลา! →"),"g3")}<p id="era" style="font-weight:600;color:var(--acc);margin:0"></p><div class="stage"><div class="ground"></div>${L4.map((l,k)=>`<div class="lay" id="l${k}">${l.map(e=>"<span>"+e+"</span>").join("")}</div>`).join("")}<div class="obj glow" id="ei" style="left:50%;top:10px;bottom:auto"></div></div><div class="gw"><div id="gg">${goose(54)}</div></div><div class="hint" id="hint">${L("👆 Drag the circle to the right →","👆 ลากวงกลมไปทางขวา →")}</div><div class="slw"><b id="mi">◀</b><input type="range" id="sl" min="0" max="300" value="0"><b id="pl">▶</b></div><div class="era"><span>${L("Long ago","สมัยก่อน")}</span><span>${L("Today","ปัจจุบัน")}</span></div>`;
+ const nx=btn(L("Continue","ไปต่อ"),ch4,"c");nx.disabled=true;
+ const k=()=>Math.round(+$("#sl").value/100);
+ const t=()=>{const v=+$("#sl").value/100;L4.forEach((_,j)=>$("#l"+j).style.opacity=Math.max(0,1-Math.abs(v-j)));$("#era").textContent="🕰 "+E[k()][1];$("#ei").textContent=E[k()][0];$("#gg").style.left="calc((100% - 54px)*"+(v/3)+")";if(v>0)$("#hint").classList.add("off");$("#g3").textContent=v>2.9?L("You reached today! Press Continue. 🎉","ถึงปัจจุบันแล้ว! กดไปต่อได้เลย 🎉"):v>0?L("Now tap the glowing icon in the picture to hear the story! 👆","แตะไอคอนที่เรืองแสงในภาพเพื่อฟังเรื่องเล่า! 👆"):L("Drag the big circle to the right to travel through time! →","ลากวงกลมใหญ่ไปทางขวาเพื่อเดินทางข้ามเวลา! →");if(v>2.9)nx.disabled=false};
+ $("#ei").onclick=()=>{const e=E[k()];dlg([[{s:e[0],n:e[2]},e[3]]])};
+ $("#sl").oninput=()=>{t();const g=$("#gg");g.classList.add("mv");clearTimeout(g.t);g.t=setTimeout(()=>g.classList.remove("mv"),300)};$("#mi").onclick=()=>{$("#sl").value=Math.max(0,+$("#sl").value-100);t()};$("#pl").onclick=()=>{$("#sl").value=Math.min(300,+$("#sl").value+100);t()};t()}
+
+/* 4 memory check */
+function ch4(){prog(4);
+ const I=["👴","🍜","🛕","🥥","🏭","🛒"],pos=[[6,6],[40,32],[72,6],[16,57],[50,66],[78,43]];
+ const Q=[[L("Who has lived here for 72 years?","ใครอยู่ที่นี่มา 72 ปีแล้ว?"),"👴"],[L("Who took over a food shop three years ago?","ใครมารับช่วงร้านอาหารเมื่อสามปีก่อน?"),"🍜"],[L("Where do locals and newcomers gather to make merit?","คนในพื้นที่และคนใหม่มาทำบุญรวมกันที่ไหน?"),"🛕"],[L("What grew in the old orchards?","สวนเก่าปลูกอะไร?"),"🥥"],[L("What made people worry about polluted air and water?","อะไรทำให้ผู้คนกังวลเรื่องอากาศและน้ำเสีย?"),"🏭"],[L("Where can you buy affordable goods?","ซื้อของราคาย่อมเยาได้ที่ไหน?"),"🛒"]];
+ const H=[L("He was born here and worked in farming.","เขาเกิดที่นี่และทำเกษตรมาตลอด"),L("She came to start a new chapter. Her portions are big!","เธอมาเริ่มชีวิตบทใหม่ และให้อาหารจานใหญ่"),L("People make merit here, and estate families donate.","ผู้คนมาทำบุญที่นี่ รวมถึงชาวหมู่บ้านจัดสรร"),L("Think of coconut sugar!","นึกถึงน้ำตาลมะพร้าวสิ!"),L("Big buildings that gave off smoke and dirty water.","อาคารใหญ่ที่ปล่อยควันและน้ำเสีย"),L("Stalls and shops with fair prices.","แผงและร้านค้าราคาย่อมเยา")];
+ let q=0,sc=0,miss=0,tried=false,lock=false;
+ box.innerHTML=`<h2>${L("4 · Memory Check","4 · ทดสอบความจำ")}</h2><div class="gq walk"><div>${goose(76)}</div><div class="bub2" id="gt"></div></div><div class="stage tall">${I.map((e,i)=>`<div class="fl" style="left:${pos[i][0]}%;top:${pos[i][1]}%;animation-delay:${i*.4}s">${e}</div>`).join("")}</div><p class="mute" id="pc"></p><button class="btn ghost c" id="hb">💡 ${L("Hint","ใบ้ให้หน่อย")}</button>`;
+ const ask=()=>{lock=false;miss=0;$("#gt").textContent=Q[q][0];$("#pc").textContent=L("Question "+(q+1)+" of "+Q.length+". Tap the right icon.","ข้อ "+(q+1)+" จาก "+Q.length+" แตะไอคอนที่ถูกต้อง")};
+ document.querySelectorAll(".fl").forEach(o=>o.onclick=()=>{if(lock)return;
+  if(o.textContent==Q[q][1]){lock=true;if(!tried)sc++;tried=false;q++;party();$("#gt").textContent=L("Honk! Correct, "+nm()+"!","ก๊าบ! ถูกต้อง "+nm()+"!");
+   setTimeout(()=>{if(q<Q.length)ask();else{$("#gt").textContent=L("You got "+sc+" of "+Q.length+" on the first try. Now lead the community!","ตอบถูกในครั้งแรก "+sc+" จาก "+Q.length+" ข้อ! ต่อไปมานำชุมชนกันเถอะ!");$("#pc").textContent="";$("#hb").remove();btn(L("Lead the community","นำชุมชน"),ch5,"c")}},1900)}
+  else{tried=true;o.classList.add("no");setTimeout(()=>o.classList.remove("no"),400);miss++;$("#gt").textContent=L("Hmm, not that one! 🤔","อืม… ไม่ใช่นะ! 🤔")+"\n\n"+Q[q][0]+(miss>=2?"\n\n💡 "+H[q]:"")}});
+ ask();$("#hb").onclick=()=>{if(lock)return;tried=true;$("#gt").textContent=Q[q][0]+"\n\n💡 "+H[q]}}
+
+/* 5 keep & grow */
+function ch5(){prog(5);let m=[50,50,50],r=0;
+ const R=[
+["🛕",L("{n}, a new housing estate wants to join the temple fair!","{n} หมู่บ้านจัดสรรใหม่อยากมาร่วมงานวัด!"),[[L("Invite everyone to help build it","ชวนทุกคนมาช่วยกันจัดงาน"),[10,5,20],L("The newcomers pitch in. Old and new neighbours become friends.","คนใหม่มาช่วยกันเต็มที่ เพื่อนบ้านเก่าและใหม่กลายเป็นเพื่อนกัน")],[L("Keep it for locals only","จัดเฉพาะคนในพื้นที่"),[20,-10,-15],L("Tradition is safe, but newcomers feel unwelcome.","ประเพณียังอยู่ แต่คนใหม่รู้สึกไม่ได้รับเชิญ")],[L("Move the fair to the estate","ย้ายงานไปจัดที่หมู่บ้านจัดสรร"),[-15,20,-5],L("A big crowd, but some old customs fade.","คนมาเยอะ แต่ธรรมเนียมเก่าบางอย่างจางหาย")]]],
+["👴",L("The factories pollute the air and water, {n}. People are upset.","โรงงานทำให้อากาศและน้ำเสีย {n} ผู้คนไม่พอใจกัน"),[[L("Ask factories to clean up, together","ชวนโรงงานมาแก้ปัญหาร่วมกัน"),[5,10,15],L("Talks are slow, but the air improves and trust grows.","เจรจาช้าหน่อย แต่อากาศดีขึ้นและความไว้ใจเพิ่มขึ้น")],[L("Demand they close","เรียกร้องให้ปิด"),[10,-20,-5],L("The air clears, but many jobs are lost.","อากาศสะอาดขึ้น แต่หลายคนตกงาน")],[L("Ignore it for now","ปล่อยไว้ก่อน"),[-5,15,-15],L("Business stays busy, but neighbours grow tired.","ธุรกิจยังคึกคัก แต่เพื่อนบ้านเริ่มเหนื่อยใจ")]]],
+["🍜",L("Rents are rising and my prices are under pressure. Help, {n}!","ค่าเช่าขึ้น ราคาอาหารของฉันกำลังแย่ ช่วยด้วย {n}!"),[[L("Support small shops and fair prices","สนับสนุนร้านเล็กและราคายุติธรรม"),[10,5,15],L("Big portions at kind prices stay alive.","อาหารจานใหญ่ราคาเป็นกันเองยังอยู่ต่อไป")],[L("Let the market decide","ปล่อยให้ตลาดตัดสิน"),[-10,15,-10],L("New shops open, but old favourites close.","ร้านใหม่เปิด แต่ร้านโปรดเก่าๆ ปิดตัว")],[L("Build a small market at the temple","สร้างตลาดเล็กๆ ที่วัด"),[15,10,10],L("The temple becomes a meeting place again.","วัดกลับมาเป็นที่พบปะอีกครั้ง")]]],
+["👴",L("Some farmers are offered money to sell their orchards.","ชาวสวนบางคนถูกเสนอเงินให้ขายสวน"),[[L("Help them keep their orchards","ช่วยให้เก็บสวนไว้"),[20,-10,5],L("Green land stays, and so do old skills.","พื้นที่สีเขียวยังอยู่ ภูมิปัญญาเก่าก็ยังอยู่")],[L("Support the sale","สนับสนุนให้ขาย"),[-20,20,-5],L("New homes rise, and the orchards disappear.","บ้านใหม่เกิดขึ้น สวนก็หายไป")],[L("Start a farmers’ cooperative","ตั้งสหกรณ์ชาวสวน"),[10,5,15],L("Like Uncle Kae Sil, farmers help each other.","เหมือนลุง Kae Sil ชาวสวนช่วยเหลือกัน")]]]];
+ const bars=()=>m.forEach((v,i)=>$("#b"+i).style.width=v+"%");
+ const draw=()=>{const x=R[r];box.innerHTML=`<h2>${L("5 · Keep & Grow","5 · รักษาและเติบโต")}</h2><p class="mute">${L("Round "+(r+1)+" of "+R.length+" · imagined situations","รอบที่ "+(r+1)+" จาก "+R.length+" · สถานการณ์สมมติ")}</p>${r==0?gd(L("Pick what you think is best, and watch the three bars change! 👇","เลือกสิ่งที่คิดว่าดีที่สุด แล้วดูแถบทั้งสามเปลี่ยนไป! 👇")):""}<div class="meter">🛕 ${L("Tradition","ประเพณี")}<div class="bar"><i id="b0"></i></div></div><div class="meter">🏙 ${L("Growth","การเติบโต")}<div class="bar"><i id="b1"></i></div></div><div class="meter">🤝 ${L("Connection","ความผูกพัน")}<div class="bar"><i id="b2"></i></div></div><div class="gq"><div class="big2">${x[0]}</div><div class="bub2" id="q">${esc(x[1].replace("{n}",nm()))}</div></div>`;bars();
+  x[2].forEach(c=>btn(c[0],()=>{c[1].forEach((d,i)=>m[i]=Math.max(0,Math.min(100,m[i]+d)));bars();box.querySelectorAll(".btn").forEach(b=>b.remove());$("#q").textContent=c[2];
+   btn(r<R.length-1?L("Next","ถัดไป"):L("See what we discovered","ดูสิ่งที่เราค้นพบ"),()=>{r++;r<R.length?draw():end(m)},"c")},"ghost"))};draw()}
+
+function end(m){const a=(m[0]+m[1]+m[2])/3,t=m[2]>=75?["🌟",L("A Community of Stories","ชุมชนแห่งเรื่องเล่า"),L("You kept people connected, and that is where the beauty lives.","เธอทำให้ผู้คนยังผูกพันกัน ความงามอยู่ตรงนั้นเอง")]:a>=55?["🙂",L("A Community in Balance","ชุมชนที่สมดุล"),L("Old and new live side by side, and the temple still brings people together.","เก่าและใหม่อยู่เคียงกัน และวัดยังรวมใจผู้คน")]:["🌱",L("A Community Still Growing","ชุมชนที่ยังเติบโต"),L("Change is never simple. Listening to people is the first step.","การเปลี่ยนแปลงไม่เคยง่าย การรับฟังผู้คนคือก้าวแรก")];
+ party(L("🎓 Well done!","🎓 เก่งมาก!"));
+ box.innerHTML=`<h1>${t[0]} ${t[1]}</h1><p>${t[2]}</p><div class="cert"><div style="display:flex;justify-content:center;gap:14px;align-items:flex-end">${pl(90)}${goose(80)}</div><p style="margin:12px 0 0"><b>${L("Fieldwork Explorer","นักสำรวจภาคสนาม")}</b><br>${esc(nm())}<br><span class="mute">${L("KMUTT · Wat Phuttha Bucha, Bang Mot","มจธ. · วัดพุทธบูชา บางมด")}</span></p></div><p>${L("The food shop owner shows courage and new beginnings. Uncle Kae Sil carries the history of the place. The true beauty of a community is not just its location, but the people and stories that make it special.","เจ้าของร้านอาหารแทนความกล้าและการเริ่มต้นใหม่ ลุง Kae Sil แทนประวัติศาสตร์ของพื้นที่ ความงามที่แท้จริงของชุมชนไม่ใช่แค่สถานที่ แต่คือผู้คนและเรื่องราวที่ทำให้ที่นี่พิเศษ")}</p>`;
+ btn(L("Play again","เล่นอีกครั้ง"),pick,"c")}
+pick();
+</script>
+</body>
+</html>
